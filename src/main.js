@@ -1,7 +1,8 @@
 const path = require("path")
 const migrate = require("./migrate")
-const remote = require("electron").remote
-const shell = require("electron").shell
+const electron = require("electron")
+const remote = electron.remote
+const shell = electron.shell
 const H = remote.require("./helpers")
 
 // TODO: Try to restore folder from last used value
@@ -32,6 +33,7 @@ function update(folder) {
 
 function done(n) {
   window.alert("Successfully organized " + n + " files")
+  shell.openItem(state.folder)
 }
 
 function fail(err) {

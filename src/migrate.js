@@ -40,25 +40,21 @@ function initializeNames(body) {
 
 function listFiles(dir) {
   return fs.readdirAsync(dir)
-}
-
-function filterScreenshots(files) {
-  return files.filter(looksLikeSteamScreenshot)
+    .filter(looksLikeSteamScreenshot)
+    .map(f => path.resolve(dir, f))
 }
 
 function processFiles(files) {
   const n = files.length
   const results = files.map(file => {
-    const id = getID(file)
+    const dir = path.dirname(file)
+    const base = path.basename(file)
+    const id = getID(base)
     const name = getFolderName(id)
-    return installFile(file, name)
+    const dest = path.resolve(dir, name, base)
+    return mv(file, dest, {mkdirp: true})
   })
   return Promise.all(results).then(() => n)
-}
-
-function installFile(file, name) {
-  const dest = path.resolve(name, file)
-  return mv(file, dest, {mkdirp: true})
 }
 
 function fail(err) {
@@ -72,7 +68,6 @@ function migrate(dir) {
     .then(initializeNames)
     .then(() => dir)
     .then(listFiles)
-    .then(filterScreenshots)
     .then(processFiles)
     .catch(fail)
 }
