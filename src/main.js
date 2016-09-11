@@ -40,6 +40,10 @@ function fail(err) {
   window.alert("An error occurred:\n\n" + err.stack)
 }
 
+function cleanup() {
+  update(state.folder)
+}
+
 $(".FolderDisplay").addEventListener("click", event => {
   shell.openItem(event.target.dataset.path)
 })
@@ -49,9 +53,11 @@ $(".PickDir").addEventListener("click", event => {
 })
 
 $(".MainButton").addEventListener("click", event => {
+  $(".MainButton").disabled = true
   migrate(state.folder)
     .then(done)
     .catch(fail)
+    .then(cleanup)
 })
 
 update(null)

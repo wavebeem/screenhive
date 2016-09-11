@@ -3,7 +3,7 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
 let mainWindow = null
-const width = 350
+const width = 340
 const height = 284 + 22
 
 function createWindow() {
