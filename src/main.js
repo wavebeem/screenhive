@@ -32,12 +32,12 @@ function update(folder) {
 }
 
 function done(n) {
-  window.alert("Successfully organized " + n + " files")
+  window.alert("Successfully organized " + n + " files", "Steamshot")
   shell.openItem(state.folder)
 }
 
 function fail(err) {
-  window.alert("An error occurred:\n\n" + err.stack)
+  window.alert("An error occurred:\n\n" + err.stack, "Steamshot")
 }
 
 function cleanup() {
