@@ -4,15 +4,35 @@ const BrowserWindow = electron.BrowserWindow
 
 let mainWindow = null
 const width = 340
-const height = 284 + 22
+const height = 340
+const debug = false
+
+const options = {
+  title: "Steamshot",
+  // icon: "foo.png"
+
+  minWidth: width,
+  minHeight: height,
+  maxWidth: width,
+  maxHeight: height,
+  width,
+  height,
+
+  show: false,
+  useContentSize: true,
+  resizable: false,
+  fullscreen: false
+}
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width, height})
+  mainWindow = new BrowserWindow(options)
+  mainWindow.setMenu(null)
   mainWindow.loadURL(`file://${__dirname}/../assets/index.html`)
-  // mainWindow.webContents.openDevTools()
-  mainWindow.on("closed", () => {
-    mainWindow = null
-  })
+  mainWindow.once("ready-to-show", () => { mainWindow.show() })
+  mainWindow.on("closed", () => { mainWindow = null })
+  if (debug) {
+    mainWindow.webContents.openDevTools()
+  }
 }
 
 function maybeQuit() {

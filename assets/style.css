@@ -98,6 +98,9 @@ button:focus {
 .PickDir {
   background-color: #264155;
   color: #67c1f5;
+  border-color: rgba(103, 193, 245, 0.2);
+  border-top-color: rgba(103, 193, 245, 0.35);
+  border-bottom-color: rgba(103, 193, 245, 0.05);
 }
 
 .MainButton {
@@ -105,9 +108,9 @@ button:focus {
   background-color: #799905;
   color: #d2e885;
   font-size: 2rem;
-  border-color: rgba(255, 255, 255, 0.30);
-  border-top-color: rgba(255, 255, 255, 0.45);
-  border-bottom-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(210, 232, 133, 0.30);
+  border-top-color: rgba(210, 232, 133, 0.75);
+  border-bottom-color: rgba(210, 232, 133, 0.15);
 }
 
 .MainButton:disabled {
