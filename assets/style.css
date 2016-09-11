@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #171a21;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 20px;
+  margin: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px 20px;
+}
+
+body :first-child {
+  margin-top: 0;
+}
+
+h1 {
+  color: #67c1f5;
+}
+
+.FolderDisplay {
+  background: transparent;
+  font: inherit;
+  display: block;
+  border: 0;
+  padding: 0;
+  margin-top: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: underline;
+}
+
+.FolderDisplay:disabled {
+  text-decoration: none;
+}
+
+.Info {
+  color: #9099a1;
+}
+
+input,
+button {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+button {
+  border: 0;
+  border-radius: 0.25em;
+  padding: 0.5em 1em;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-top-color: rgba(255, 255, 255, 0.25);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.10);
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.0) 5%,
+      rgba(0, 0, 0, 0.1) 95%
+    );
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:focus {
+  outline: 0;
+  box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.9);
+}
+
+.PickDir {
+  background-color: #264155;
+  color: #67c1f5;
+}
+
+.MainButton {
+  margin-top: 0.5em;
+  background-color: #799905;
+  color: #d2e885;
+  font-size: 2rem;
+  border-color: rgba(255, 255, 255, 0.30);
+  border-top-color: rgba(255, 255, 255, 0.45);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.MainButton:disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0;
+}

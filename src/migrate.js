@@ -47,12 +47,13 @@ function filterScreenshots(files) {
 }
 
 function processFiles(files) {
+  const n = files.length
   const results = files.map(file => {
     const id = getID(file)
     const name = getFolderName(id)
     return installFile(file, name)
   })
-  return Promise.all(results)
+  return Promise.all(results).then(() => n)
 }
 
 function installFile(file, name) {
