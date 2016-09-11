@@ -8,7 +8,7 @@ const height = 340
 const debug = false
 
 const options = {
-  title: "Steamshot",
+  title: "Screenhive",
   // icon: "foo.png"
 
   minWidth: width,

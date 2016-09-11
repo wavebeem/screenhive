@@ -1,5 +1,5 @@
 {
-  "name": "steamshot",
+  "name": "screenhive",
   "version": "1.0.0",
   "description": "An organizer for Steam PNG screenshot folders",
   "main": "src/start.js",

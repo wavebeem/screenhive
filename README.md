@@ -1,3 +1,3 @@
-# steamshot
+# screenhive
 
-Steamshot is an organizer for Steam PNG screenshot folders.
+Screenhive is an organizer for Steam PNG screenshot folders.
