@@ -14,8 +14,14 @@ function $(sel) {
   return document.querySelector(sel)
 }
 
-function $$(sel) {
-  return [].slice.call(document.querySelectorAll(sel))
+function $$click(sel, fn) {
+  const elems = [].slice.call(document.querySelectorAll(sel))
+  elems.forEach(elem => {
+    elem.addEventListener("click", event => {
+      event.preventDefault()
+      fn(event)
+    })
+  })
 }
 
 function setText(elem, text) {
@@ -48,22 +54,19 @@ function cleanup() {
   update(state.folder)
 }
 
-$$("[data-external]").forEach(elem => {
-  elem.addEventListener("click", event => {
-    shell.openExternal(event.target.href)
-    event.preventDefault()
-  })
+$$click("[data-external]", event => {
+  shell.openExternal(event.target.href)
 })
 
-$(".FolderDisplay").addEventListener("click", event => {
+$$click(".FolderDisplay", event => {
   shell.openItem(event.target.dataset.path)
 })
 
-$(".PickDir").addEventListener("click", event => {
+$$click(".PickDir", event => {
   H.pickDir().then(update)
 })
 
-$(".MainButton").addEventListener("click", event => {
+$$click(".MainButton", event => {
   $(".MainButton").disabled = true
   migrate(state.folder)
     .then(done)
