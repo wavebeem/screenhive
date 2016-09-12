@@ -14,6 +14,10 @@ function $(sel) {
   return document.querySelector(sel)
 }
 
+function $$(sel) {
+  return [].slice.call(document.querySelectorAll(sel))
+}
+
 function setText(elem, text) {
   elem.innerHTML = ""
   const node = document.createTextNode(text)
@@ -43,6 +47,13 @@ function fail(err) {
 function cleanup() {
   update(state.folder)
 }
+
+$$("[data-external]").forEach(elem => {
+  elem.addEventListener("click", event => {
+    shell.openExternal(event.target.href)
+    event.preventDefault()
+  })
+})
 
 $(".FolderDisplay").addEventListener("click", event => {
   shell.openItem(event.target.dataset.path)

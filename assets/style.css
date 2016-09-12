@@ -23,18 +23,51 @@ body {
     "Helvetica Neue",
     sans-serif;
   font-size: 20px;
+}
+
+main {
   margin: 0;
   max-width: 500px;
   margin: 0 auto;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-body :first-child {
+.Copyright {
+  text-align: center;
+}
+
+.Flex-1-1 {
+  flex: 1 1 auto;
+}
+
+.Flex-0-0 {
+  flex: 0 0 auto;
+}
+
+p {
   margin-top: 0;
+}
+
+main > :last-child {
+  margin-bottom: 0;
 }
 
 h1 {
   color: #67c1f5;
+}
+
+a {
+  color: #67c1f5;
+  text-decoration: none;
+  padding-bottom: 1px;
+  border-bottom: 1px solid currentColor;
 }
 
 .FolderDisplay {
@@ -57,6 +90,7 @@ h1 {
   border-bottom-color: transparent !important;
 }
 
+.Info a,
 .Info {
   color: #9099a1;
 }
@@ -82,7 +116,7 @@ button {
     linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.0) 5%,
-      rgba(0, 0, 0, 0.1) 95%
+      rgba(0, 0, 0, 0.2) 95%
     );
 }
 
@@ -90,6 +124,7 @@ button:disabled {
   cursor: default;
 }
 
+a:focus,
 button:focus {
   outline: 0;
   box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.9);
