@@ -42,12 +42,12 @@ function update(folder) {
 }
 
 function done(n) {
-  window.alert("Successfully organized " + n + " files", "Screenhive")
+  window.alert("Successfully organized " + n + " files")
   shell.openItem(state.folder)
 }
 
 function fail(err) {
-  window.alert("An error occurred:\n\n" + err.stack, "Screenhive")
+  window.alert("An error occurred:\n\n" + err.stack)
 }
 
 function cleanup() {

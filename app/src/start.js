@@ -8,9 +8,6 @@ const height = 550
 const debug = false
 
 const options = {
-  title: "Screenhive",
-  // icon: "foo.png"
-
   minWidth: width,
   minHeight: height,
   maxWidth: width,
@@ -27,7 +24,7 @@ const options = {
 function createWindow() {
   mainWindow = new BrowserWindow(options)
   mainWindow.setMenu(null)
-  mainWindow.loadURL(`file://${__dirname}/../assets/index.html`)
+  mainWindow.loadURL("file://" + __dirname + "/../index.html")
   mainWindow.once("ready-to-show", () => { mainWindow.show() })
   mainWindow.on("closed", () => { mainWindow = null })
   if (debug) {

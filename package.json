@@ -1,27 +1,27 @@
 {
-  "name": "screenhive",
-  "productName": "Screenhive",
-  "version": "1.0.0",
-  "description": "An organizer for Steam PNG screenshot folders",
-  "main": "src/start.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "electron-packager": "electron-packager",
-    "package-all": "electron-packager . --all",
-    "start": "electron ."
+    "postinstall": "install-app-deps",
+    "start": "electron app",
+    "pack": "build --dir",
+    "dist:mac": "build --mac",
+    "dist:win": "build --win"
   },
-  "author": "Brian Mock <brian@mockbrian.com>",
-  "license": "MIT",
-  "dependencies": {
-    "bluebird": "^3.4.6",
-    "mv": "^2.1.1",
-    "request": "^2.74.0",
-    "request-promise": "^4.1.1",
-    "sanitize-filename": "^1.6.0"
+  "build": {
+    "appId": "com.mockbrian.Screenhive",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "zip"
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "nsis": {
+      "oneClick": true
+    }
   },
   "devDependencies": {
     "electron": "^1.3.5",
-    "electron-packager": "^8.0.0"
+    "electron-builder": "^6.7.3"
   }
 }
