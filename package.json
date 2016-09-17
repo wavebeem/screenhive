@@ -4,6 +4,7 @@
     "postinstall": "install-app-deps",
     "start": "electron app",
     "pack": "build --dir",
+    "ico": "convert img/Screenhive-*px.png build/icon.ico",
     "dist:mac": "build --mac",
     "dist:win": "build --win"
   },
