@@ -1,4 +1,4 @@
-# <img align="left" src="img/Screenhive-48px.png">&nbsp;Screenhive
+# <img align="left" src="img/Screenhive-48px.png"> Screenhive
 
 
 
