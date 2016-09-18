@@ -95,6 +95,12 @@ a:hover {
   width: auto !important;
 }
 
+.FolderDisplay:hover {
+  color: white;
+  cursor: pointer;
+  text-shadow: 0 0 2px black;
+}
+
 .FolderDisplay:disabled {
   border-bottom-color: transparent !important;
 }
