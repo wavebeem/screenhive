@@ -1,5 +1,6 @@
 const reducer = require("./reducer")
 const Screenhive = require("./screenhive")
+const Conf = require("./conf")
 const React = require("react")
 const ReactDOM = require("react-dom")
 const ReactRedux = require("react-redux")
@@ -9,7 +10,7 @@ const $ = React.createElement
 const initialState = {
   isWorking: false,
   progress: 0,
-  folder: null
+  folder: Conf.read().folder
 }
 const store = Redux.createStore(reducer, initialState)
 const component = $(Screenhive, {})

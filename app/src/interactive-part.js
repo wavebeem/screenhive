@@ -1,5 +1,6 @@
 const ReactRedux = require("react-redux")
 const React = require("react")
+const Conf = require("./conf")
 const ProgressBar = require("./progress-bar")
 const migrate = require("./migrate")
 const H = require("./helpers")
@@ -7,12 +8,13 @@ const $ = React.createElement
 
 function InteractivePart(props) {
   function pickDir() {
-    H.pickDir().then(dir => {
+    H.pickDir().then(folder => {
       dispatch({
         type: "Update",
         key: "folder",
-        value: dir
+        value: folder
       })
+      Conf.write({folder})
     })
   }
 
