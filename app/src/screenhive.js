@@ -10,7 +10,8 @@ function mapStateToProps(state) {
 }
 
 function $A(href, text) {
-  function onClick() {
+  function onClick(event) {
+    event.preventDefault()
     shell.openItem(href)
   }
   return $("a", {onClick, href}, text)
