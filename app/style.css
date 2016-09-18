@@ -53,6 +53,7 @@ main {
 
 p {
   margin-top: 0;
+  line-height: 1.4;
 }
 
 main > :last-child {

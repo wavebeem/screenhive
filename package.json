@@ -5,6 +5,7 @@
     "start": "electron app",
     "pack": "build --dir",
     "ico": "convert img/Screenhive-*px.png build/icon.ico",
+    "icns": "convert img/Screenhive-*px.png build/icon.icns",
     "dist:mac": "build --mac",
     "dist:win": "build --win"
   },
