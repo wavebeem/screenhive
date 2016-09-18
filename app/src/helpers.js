@@ -1,11 +1,12 @@
 const electron = require("electron")
-const dialog = electron.dialog
+const shell = electron.shell
+const remote = electron.remote
 
 const properties = ["openDirectory"]
 
 function pickDir() {
   return new Promise((resolve, reject) => {
-    dialog.showOpenDialog({properties}, files => {
+    remote.dialog.showOpenDialog({properties}, files => {
       if (files) {
         resolve(files[0])
       } else {
@@ -15,4 +16,15 @@ function pickDir() {
   })
 }
 
+function openUrl(url) {
+  return shell.openItem(url)
+}
+
+function showMessageBox(options, cb) {
+  cb = cb || (() => {})
+  return remote.dialog.showMessageBox(options, cb)
+}
+
 exports.pickDir = pickDir
+exports.openUrl = openUrl
+exports.showMessageBox = showMessageBox

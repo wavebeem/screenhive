@@ -16,7 +16,7 @@
       "target": "zip"
     },
     "win": {
-      "target": ["nsis"]
+      "target": "nsis"
     },
     "nsis": {
       "oneClick": true
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "electron": "^1.3.5",
-    "electron-builder": "^6.7.3"
+    "electron-builder": "^6.7.3",
+    "eslint": "^3.5.0"
   }
 }

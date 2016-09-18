@@ -11,7 +11,6 @@ const request = require("request-promise")
 const sanitize = require("sanitize-filename")
 
 const SCREENSHOT_REGEXP = /[0-9]+_.*[.]png/
-const SCREENSHOT_DIR = "."
 const STEAM_URL = "https://api.steampowered.com/ISteamApps/GetAppList/v0001/"
 
 const folderNames = {}
@@ -60,19 +59,12 @@ function processFiles(onProgress, files) {
   return Promise.all(results).then(() => n)
 }
 
-function fail(err) {
-  console.error("UNHANDLED ERROR")
-  console.error(err)
-  throw err
-}
-
 function migrate(dir, onProgress) {
   return getJSON(STEAM_URL)
     .then(initializeNames)
     .then(() => dir)
     .then(listFiles)
     .then(files => processFiles(onProgress, files))
-    .catch(fail)
 }
 
 module.exports = migrate

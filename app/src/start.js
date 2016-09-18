@@ -3,9 +3,9 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
 let mainWindow = null
-const width = 400
-const height = 550
-const debug = false
+const DEBUG = false
+const width = DEBUG ? 1440 : 400
+const height = DEBUG ? 900 : 550
 
 const options = {
   minWidth: width,
@@ -23,7 +23,7 @@ function createWindow() {
   mainWindow.loadURL("file://" + __dirname + "/../index.html")
   mainWindow.once("ready-to-show", () => { mainWindow.show() })
   mainWindow.on("closed", () => { mainWindow = null })
-  if (debug) {
+  if (DEBUG) {
     mainWindow.webContents.openDevTools()
   }
 }
