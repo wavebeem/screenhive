@@ -1,4 +1,6 @@
-# Screenhive
+# <img align="left" src="img/Screenhive-48px.png">&nbsp;Screenhive
+
+
 
 Screenhive is an organizer for Steam PNG screenshot folders.
 
