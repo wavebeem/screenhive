@@ -5,12 +5,12 @@ const remote = electron.remote
 const properties = ["openDirectory"]
 
 function pickDir() {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     remote.dialog.showOpenDialog({properties}, files => {
       if (files) {
         resolve(files[0])
       } else {
-        reject(new Error("no file selected"))
+        throw new Error("no file selected")
       }
     })
   })
