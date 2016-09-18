@@ -3,6 +3,7 @@ const migrate = require("./migrate")
 const electron = require("electron")
 const remote = electron.remote
 const shell = electron.shell
+const dialog = remote.dialog
 const H = remote.require("./helpers")
 
 // TODO: Try to restore folder from last used value
@@ -32,26 +33,48 @@ function setText(elem, text) {
 
 function update(folder) {
   state.folder = folder
-  $(".MainButton").disabled = !state.folder
+  const mainButton = $(".MainButton")
+  mainButton.disabled = !state.folder
+  setText(mainButton, "Organize")
+  $(".Progress").classList.add("hidden")
   const text = state.folder || placeholderText
-  const elem = $(".FolderDisplay")
-  elem.disabled = !state.folder
-  setText(elem, text)
-  elem.title = text
-  elem.dataset.path = text
+  const folderDisplay = $(".FolderDisplay")
+  folderDisplay.disabled = !state.folder
+  setText(folderDisplay, text)
+  folderDisplay.title = text
+  folderDisplay.dataset.path = text
 }
 
 function done(n) {
-  window.alert("Successfully organized " + n + " files")
-  shell.openItem(state.folder)
+  const options = {
+    type: "info",
+    title: "Screenhive: Success",
+    message: "Successfully organized " + n + " files.",
+    buttons: ["OK"]
+  }
+  dialog.showMessageBox(options, () => {
+    shell.openItem(state.folder)
+  })
 }
 
 function fail(err) {
-  window.alert("An error occurred:\n\n" + err.stack)
+  const options = {
+    type: "error",
+    title: "Screenhive: Error",
+    message: err.stack,
+    buttons: ["OK"]
+  }
+  dialog.showMessageBox(options)
 }
 
 function cleanup() {
   update(state.folder)
+}
+
+function showProgress(completed, total) {
+  const percent = Math.floor(100 * completed / total)
+  $(".Progress").classList.remove("hidden")
+  $(".Progress > .ProgressFill").style.width = percent + "%";
 }
 
 $$click("[data-external]", event => {
@@ -67,8 +90,10 @@ $$click(".PickDir", event => {
 })
 
 $$click(".MainButton", event => {
-  $(".MainButton").disabled = true
-  migrate(state.folder)
+  const mainButton = $(".MainButton")
+  mainButton.disabled = true
+  setText(mainButton, "Please wait…")
+  migrate(state.folder, showProgress)
     .then(done)
     .catch(fail)
     .then(cleanup)

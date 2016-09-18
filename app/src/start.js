@@ -10,15 +10,11 @@ const debug = false
 const options = {
   minWidth: width,
   minHeight: height,
-  maxWidth: width,
-  maxHeight: height,
   width,
   height,
 
   show: false,
   useContentSize: true,
-  resizable: false,
-  fullscreen: false
 }
 
 function createWindow() {
