@@ -1,8 +1,7 @@
-const InteractivePart = require("./interactive-part")
-const electron = require("electron")
-const shell = electron.shell
 const ReactRedux = require("react-redux")
 const React = require("react")
+const InteractivePart = require("./interactive-part")
+const H = require("./helpers")
 const $ = React.createElement
 
 function mapStateToProps(state) {
@@ -12,7 +11,7 @@ function mapStateToProps(state) {
 function $A(href, text) {
   function onClick(event) {
     event.preventDefault()
-    shell.openItem(href)
+    H.openUrl(href)
   }
   return $("a", {onClick, href}, text)
 }

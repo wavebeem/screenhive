@@ -19,7 +19,7 @@ function InteractivePart(props) {
   }
 
   function openFolder() {
-    H.openUrl(folder)
+    H.openFile(folder)
   }
 
   function start() {
@@ -42,7 +42,7 @@ function InteractivePart(props) {
       buttons: ["OK"]
     }
     H.showMessageBox(options, () => {
-      H.openUrl(state.folder)
+      H.openFile(state.folder)
     })
   }
 
