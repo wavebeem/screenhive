@@ -16,8 +16,12 @@ function pickDir() {
   })
 }
 
+function openFile(file) {
+  return shell.openItem(file)
+}
+
 function openUrl(url) {
-  return shell.openItem(url)
+  return shell.openExternal(url)
 }
 
 function showMessageBox(options, cb) {
@@ -26,5 +30,6 @@ function showMessageBox(options, cb) {
 }
 
 exports.pickDir = pickDir
+exports.openFile = openFile
 exports.openUrl = openUrl
 exports.showMessageBox = showMessageBox

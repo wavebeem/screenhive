@@ -4,8 +4,8 @@ const BrowserWindow = electron.BrowserWindow
 
 let mainWindow = null
 const DEBUG = false
-const width = DEBUG ? 1440 : 400
-const height = DEBUG ? 900 : 550
+const width = DEBUG ? 1280 : 400
+const height = DEBUG ? 800 : 550
 
 const options = {
   minWidth: width,
