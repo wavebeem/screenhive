@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <meta name="theme-color" content="#1b2838">
+
+  <meta name="author" content="Brian Mock">
+  <meta name="description" content="{{ page.description }}">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@wavebeem">
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:description" content="{{ page.description }}">
+  <meta name="twitter:image" content="https://gravatar.com/avatar/c32e7e8baaee948e2ba1f607646da74d?s=150">
+
+  <title>{{ page.title }}</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    if (window.location.hostname === "screenhive.net") {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-52704502-6', 'auto');
+      ga('send', 'pageview');
+    }
+  </script>
+
+</head>
+<body>
+{{ content }}
+</body>
+</html>
