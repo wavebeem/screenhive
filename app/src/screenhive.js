@@ -16,26 +16,20 @@ function $A(href, text) {
   return $("a", {onClick, href}, text)
 }
 
-const wikiUrl = "https://github.com/wavebeem/screenhive/wiki"
-const homePage = "https://github.com/wavebeem/screenhive"
+const homePage = "https://screenhive.net"
 const myPage = "http://mockbrian.com"
 
 function Screenhive(props) {
   const state = props.state
   return $("main", {},
     $("p", {className: "Flex-0-0"},
-      `Your PNG screenshots will be organized into folders
+      `Follow the `,
+      $A(homePage, `Steam setup instructions`),
+      ` to create a screenshot folder before using this app.`
+    ),
+    $("p", {className: "Flex-0-0"},
+      `Your screenshots will be organized into folders
       based on the title of the game in Steam.`
-    ),
-    $("p", {className: "Flex-0-0"},
-      `Set up `,
-      $A(wikiUrl, `PNG screenshots for Steam`),
-      ` before using Screenhive.`
-    ),
-    $("p", {className: "Flex-0-0"},
-      `Visit the `,
-      $A(homePage, `Screenhive website`),
-      ` for more information.`
     ),
     $(InteractivePart, {state}),
     $("p", {className: "Flex-0-0 Info Copyright"},

@@ -1,11 +1,12 @@
 const electron = require("electron")
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
+const package = require("../package.json")
 
 let mainWindow = null
 const DEBUG = false
 const width = DEBUG ? 1280 : 400
-const height = DEBUG ? 800 : 550
+const height = DEBUG ? 800 : 500
 
 const options = {
   minWidth: width,
@@ -21,6 +22,7 @@ function createWindow() {
   mainWindow = new BrowserWindow(options)
   mainWindow.setMenu(null)
   mainWindow.loadURL("file://" + __dirname + "/../index.html")
+  mainWindow.setTitle(package.productName + " " + package.version)
   mainWindow.once("ready-to-show", () => { mainWindow.show() })
   mainWindow.on("closed", () => { mainWindow = null })
   if (DEBUG) {
