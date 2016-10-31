@@ -82,8 +82,10 @@ function InteractivePart(props) {
   const progress = state.progress
 
   return $("div", {className: "Flex-1-1"},
-    $("button", {className: "PickDir", onClick: pickDir},
-      `Choose screenshot folder`
+    $("button", {className: "PickDir ButtonOuter", onClick: pickDir},
+      $("div", {className: "ButtonInner"},
+        `Choose screenshot folder`
+      )
     ),
     $("button",
       {
@@ -95,11 +97,13 @@ function InteractivePart(props) {
     ),
     $("button",
       {
-        className: "MainButton",
+        className: "MainButton ButtonOuter",
         disabled: !folder || isWorking,
         onClick: start
       },
-      isWorking ? `Please wait…` : `Organize`
+      $("div", {className: "ButtonInner"},
+        isWorking ? `Please wait…` : `Organize`
+      )
     ),
     $(ProgressBar, {hidden, progress})
   )

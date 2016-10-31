@@ -4,10 +4,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --blue03: #1b2838;
+  --green01: #d2e885;
+  --green02: #799905;
+  --green02b: #91b317;
+  --blue01: #67c1f5;
+  --blue02: #264155;
+  --blue02b: #2c4a61;
+}
+
 html {
   margin: 0;
   padding: 0;
-  background-color: #1b2838;
+  background-color: var(--blue03);
   background-image:
     linear-gradient(to bottom,
     rgba(0, 0, 0, 0.0),
@@ -70,11 +80,11 @@ main > :last-child {
 }
 
 h1 {
-  color: #67c1f5;
+  color: var(--blue01);
 }
 
 a {
-  color: #67c1f5;
+  color: var(--blue01);
   text-decoration: none;
   padding-bottom: 1px;
   border-bottom: 1px solid currentColor;
@@ -109,12 +119,11 @@ a:hover {
 }
 
 .FolderDisplay:disabled {
-  border-bottom-color: transparent !important;
 }
 
 .Info a,
 .Info {
-  color: #9099a1;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .Info a:hover {
@@ -136,7 +145,7 @@ a:hover {
 }
 
 .ProgressFill {
-  background: #799905;
+  background: var(--green02);
   width: 0;
   height: 100%;
 }
@@ -149,19 +158,31 @@ button {
 }
 
 button {
-  border: 0;
-  border-radius: 0.25em;
-  padding: 0.5em 1em;
   font: inherit;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-top-color: rgba(255, 255, 255, 0.25);
-  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.ButtonOuter {
+  border: 0;
+  padding: 1px;
+
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.10);
+  background-color: #666;
   background-image:
     linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.0) 5%,
-      rgba(0, 0, 0, 0.2) 95%);
+      rgba(0, 0, 0, 0.0),
+      rgba(0, 0, 0, 0.2) 100%);
+}
+
+.ButtonOuter,
+.ButtonInner {
+  cursor: pointer;
+  border-radius: 0.1em;
+}
+
+.ButtonInner {
+  padding: 0.5em 1em;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 button,
@@ -181,34 +202,44 @@ button:focus {
 }
 
 .PickDir {
-  background-color: #264155;
-  color: #67c1f5;
-  border-color: rgba(103, 193, 245, 0.2);
-  border-top-color: rgba(103, 193, 245, 0.35);
-  border-bottom-color: rgba(103, 193, 245, 0.05);
+  background-color: var(--blue02);
+  color: white;
+  background-image:
+    linear-gradient(to bottom,
+      var(--blue01),
+      var(--blue02) 50%);
 }
 
-.PickDir:hover {
-  background-color: #2c4a61;
+.PickDir .ButtonInner {
+  background-color: var(--blue02);
+}
+
+.PickDir:hover .ButtonInner {
+  background-color: var(--blue02b);
+  color: white;
 }
 
 .MainButton {
+  font-weight: bold;
   margin-top: 0.5em;
-  background-color: #799905;
-  color: #d2e885;
+  background-color: var(--green02);
+  color: white;
+  background-image:
+    linear-gradient(to bottom,
+      var(--green01),
+      var(--green02) 50%);
   font-size: 2rem;
-  border-color: rgba(210, 232, 133, 0.30);
-  border-top-color: rgba(210, 232, 133, 0.75);
-  border-bottom-color: rgba(210, 232, 133, 0.15);
 }
 
-.MainButton:hover {
-  background-color: #91b317;
+.MainButton .ButtonInner {
+  background: var(--green02);
+}
+
+.MainButton:hover .ButtonInner {
+  background-color: var(--green02b);
+  color: white;
 }
 
 .MainButton:disabled {
   background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0;
-}
