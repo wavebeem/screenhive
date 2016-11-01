@@ -27,5 +27,5 @@ if ARGV.include?("-p")
   invalidate cf_distro
 else
   jekyll "--drafts"
-  s3_sync dev
+  sync s3_dev
 end
