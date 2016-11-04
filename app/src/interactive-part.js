@@ -71,7 +71,7 @@ function InteractivePart(props) {
       key: "isDone",
       value: false,
     })
-    H.openFile(state.folder)
+    openFolder()
   }
 
   const dispatch = props.dispatch
