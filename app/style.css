@@ -1,12 +1,13 @@
 * {
   -webkit-user-select: none;
+  user-select: none;
   cursor: default;
   box-sizing: border-box;
 }
 
 :root {
   --blue03: #1b2838;
-  --green01: #d2e885;
+  --green01: #e6f2bb;
   --green02: #799905;
   --green02b: #91b317;
   --blue01: #67c1f5;
@@ -113,12 +114,8 @@ a:hover {
 }
 
 .FolderDisplay:hover {
-  color: white;
   cursor: pointer;
   text-shadow: 0 0 2px black;
-}
-
-.FolderDisplay:disabled {
 }
 
 .Info a,
@@ -130,24 +127,32 @@ a:hover {
   color: white;
 }
 
-.Progress.hidden {
-  visibility: hidden;
+.tc {
+  text-align: center;
 }
 
-.Progress {
-  background: rgba(0, 0, 0, 0.10);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  height: 24px;
-  margin: 1em 0;
-  padding: 1px;
-  width: 100%;
-  border-radius: 2px;
+.dib {
+  display: inline-block;
 }
 
-.ProgressFill {
-  background: var(--green02);
-  width: 0;
-  height: 100%;
+.Spinner {
+  margin: 1em;
+  width: 3em;
+  height: 3em;
+  border: 3px solid;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: SpinSpinSpin 1s infinite cubic-bezier(0.72, 0.3, 0.82, 0.54);
+}
+
+@keyframes SpinSpinSpin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 input,
@@ -201,7 +206,7 @@ button:focus {
   box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.9);
 }
 
-.PickDir {
+.SecondaryButton {
   background-color: var(--blue02);
   color: white;
   background-image:
@@ -210,13 +215,12 @@ button:focus {
       var(--blue02) 50%);
 }
 
-.PickDir .ButtonInner {
+.SecondaryButton .ButtonInner {
   background-color: var(--blue02);
 }
 
-.PickDir:hover .ButtonInner {
+.SecondaryButton:hover .ButtonInner {
   background-color: var(--blue02b);
-  color: white;
 }
 
 .MainButton {
@@ -237,9 +241,18 @@ button:focus {
 
 .MainButton:hover .ButtonInner {
   background-color: var(--green02b);
-  color: white;
 }
 
 .MainButton:disabled {
   background: rgba(255, 255, 255, 0.03);
   color: rgba(255, 255, 255, 0.2);
+}
+
+.ButtonOuter:disabled {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: transparent;
+}
+
+.ButtonOuter:disabled .ButtonInner {
+  background: transparent;
+}

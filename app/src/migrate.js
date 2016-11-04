@@ -43,9 +43,7 @@ function listFiles(dir) {
     .map(f => path.resolve(dir, f))
 }
 
-function processFiles(onProgress, files) {
-  onProgress = onProgress || (() => {})
-  let i = 1
+function processFiles(files) {
   const n = files.length
   const results = files.map(file => {
     const dir = path.dirname(file)
@@ -54,17 +52,16 @@ function processFiles(onProgress, files) {
     const name = getFolderName(id)
     const dest = path.resolve(dir, name, base)
     return mv(file, dest, {mkdirp: true})
-      .then(() => onProgress(i++, n))
   })
   return Promise.all(results).then(() => n)
 }
 
-function migrate(dir, onProgress) {
+function migrate(dir) {
   return getJSON(STEAM_URL)
     .then(initializeNames)
     .then(() => dir)
     .then(listFiles)
-    .then(files => processFiles(onProgress, files))
+    .then(processFiles)
 }
 
 module.exports = migrate

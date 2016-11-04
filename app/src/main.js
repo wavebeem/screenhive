@@ -8,10 +8,12 @@ const Redux = require("redux")
 const $ = React.createElement
 
 const initialState = {
+  isDone: false,
   isWorking: false,
   progress: 0,
   folder: Conf.read().folder
 }
+
 const store = Redux.createStore(reducer, initialState)
 const component = $(Screenhive, {})
 const container = $(ReactRedux.Provider, {store}, component)

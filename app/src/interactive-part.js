@@ -1,7 +1,6 @@
 const ReactRedux = require("react-redux")
 const React = require("react")
 const Conf = require("./conf")
-const ProgressBar = require("./progress-bar")
 const migrate = require("./migrate")
 const H = require("./helpers")
 const $ = React.createElement
@@ -28,21 +27,22 @@ function InteractivePart(props) {
       key: "isWorking",
       value: true
     })
-    migrate(folder, updateProgress)
+    migrate(folder)
       .then(done)
       .catch(fail)
       .then(cleanup)
   }
 
-  function done(n) {
-    const options = {
-      type: "info",
-      title: "Screenhive: Success",
-      message: "Successfully organized " + n + " files.",
-      buttons: ["OK"]
-    }
-    H.showMessageBox(options, () => {
-      H.openFile(state.folder)
+  function done() {
+    dispatch({
+      type: "Update",
+      key: "isWorking",
+      value: false
+    })
+    dispatch({
+      type: "Update",
+      key: "isDone",
+      value: true,
     })
   }
 
@@ -65,47 +65,64 @@ function InteractivePart(props) {
     })
   }
 
-  function updateProgress(completed, total) {
-    const percent = Math.floor(100 * completed / total)
+  function viewScreenshots() {
     dispatch({
       type: "Update",
-      key: "progress",
-      value: percent
+      key: "isDone",
+      value: false,
     })
+    H.openFile(state.folder)
   }
 
   const dispatch = props.dispatch
   const state = props.state
   const folder = state.folder || null
   const isWorking = state.isWorking
-  const hidden = !isWorking
-  const progress = state.progress
+  const isDone = state.isDone
+
+  const doneScreen =
+    $("div", {},
+      $("button", {className: "MainButton ButtonOuter", onClick: viewScreenshots},
+        $("div", {className: "ButtonInner"}, `View screenshots`)
+      )
+    )
+
+  const startScreen =
+    $("div", {},
+      $("button", {className: "SecondaryButton ButtonOuter", onClick: pickDir},
+        $("div", {className: "ButtonInner"},
+          `Choose screenshot folder`
+        )
+      ),
+      $("button",
+        {
+          className: "FolderDisplay Info",
+          disabled: !folder,
+          onClick: openFolder
+        },
+        folder || "No folder selected"
+      ),
+      $("button",
+        {
+          className: "MainButton ButtonOuter",
+          disabled: !folder || isWorking,
+          onClick: start
+        },
+        $("div", {className: "ButtonInner"},
+          isWorking ? `Please wait…` : `Organize`
+        )
+      )
+    )
+
+  const spinner =
+    $("div", {className: "tc"},
+      $("div", {className: "Spinner dib"})
+    )
 
   return $("div", {className: "Flex-1-1"},
-    $("button", {className: "PickDir ButtonOuter", onClick: pickDir},
-      $("div", {className: "ButtonInner"},
-        `Choose screenshot folder`
-      )
-    ),
-    $("button",
-      {
-        className: "FolderDisplay Info",
-        disabled: !folder,
-        onClick: openFolder
-      },
-      folder || "No folder selected"
-    ),
-    $("button",
-      {
-        className: "MainButton ButtonOuter",
-        disabled: !folder || isWorking,
-        onClick: start
-      },
-      $("div", {className: "ButtonInner"},
-        isWorking ? `Please wait…` : `Organize`
-      )
-    ),
-    $(ProgressBar, {hidden, progress})
+    isDone ? doneScreen : null,
+    isWorking ? spinner : null,
+    !isWorking && !isDone ? startScreen : null
   )
 }
 
