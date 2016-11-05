@@ -6,13 +6,13 @@ const H = require("./helpers")
 const $ = React.createElement
 
 function InteractivePart(props) {
+  function update(key, value) {
+    dispatch({type: "Update", key, value})
+  }
+
   function pickDir() {
     H.pickDir().then(folder => {
-      dispatch({
-        type: "Update",
-        key: "folder",
-        value: folder
-      })
+      update("folder", folder)
       Conf.write({folder})
     })
   }
@@ -22,31 +22,18 @@ function InteractivePart(props) {
   }
 
   function start() {
-    dispatch({
-      type: "Update",
-      key: "isWorking",
-      value: true
-    })
+    update("screen", "working")
     migrate(folder)
       .then(done)
       .catch(fail)
-      .then(cleanup)
   }
 
   function done() {
-    dispatch({
-      type: "Update",
-      key: "isWorking",
-      value: false
-    })
-    dispatch({
-      type: "Update",
-      key: "isDone",
-      value: true,
-    })
+    update("screen", "done")
   }
 
   function fail(err) {
+    cleanup()
     process.stdout.write(err.stack + "\n")
     const options = {
       type: "error",
@@ -58,27 +45,18 @@ function InteractivePart(props) {
   }
 
   function cleanup() {
-    dispatch({
-      type: "Update",
-      key: "isWorking",
-      value: false
-    })
+    update("screen", "start")
   }
 
   function viewScreenshots() {
-    dispatch({
-      type: "Update",
-      key: "isDone",
-      value: false,
-    })
+    cleanup()
     openFolder()
   }
 
   const dispatch = props.dispatch
   const state = props.state
   const folder = state.folder || null
-  const isWorking = state.isWorking
-  const isDone = state.isDone
+  const screen = state.screen
 
   const doneScreen =
     $("div", {},
@@ -87,7 +65,7 @@ function InteractivePart(props) {
       )
     )
 
-  const startScreen =
+  const folderPicker =
     $("div", {},
       $("button", {className: "SecondaryButton ButtonOuter", onClick: pickDir},
         $("div", {className: "ButtonInner"},
@@ -101,17 +79,25 @@ function InteractivePart(props) {
           onClick: openFolder
         },
         folder || "No folder selected"
-      ),
-      $("button",
-        {
-          className: "MainButton ButtonOuter",
-          disabled: !folder || isWorking,
-          onClick: start
-        },
-        $("div", {className: "ButtonInner"},
-          isWorking ? `Please wait…` : `Organize`
-        )
       )
+    )
+
+  const mainButton =
+    $("button",
+      {
+        className: "MainButton ButtonOuter",
+        disabled: !folder || screen === "working",
+        onClick: start
+      },
+      $("div", {className: "ButtonInner"},
+        screen === "working" ? `Please wait…` : `Organize`
+      )
+    )
+
+  const startScreen =
+    $("div", {},
+      folderPicker,
+      folder ? mainButton : null
     )
 
   const spinner =
@@ -120,9 +106,9 @@ function InteractivePart(props) {
     )
 
   return $("div", {className: "Flex-1-1"},
-    isDone ? doneScreen : null,
-    isWorking ? spinner : null,
-    !isWorking && !isDone ? startScreen : null
+    screen === "start" ? startScreen : null,
+    screen === "working" ? spinner : null,
+    screen === "done" ? doneScreen : null
   )
 }
 

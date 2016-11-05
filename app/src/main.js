@@ -8,8 +8,7 @@ const Redux = require("redux")
 const $ = React.createElement
 
 const initialState = {
-  isDone: false,
-  isWorking: false,
+  screen: "start",
   progress: 0,
   folder: Conf.read().folder
 }
