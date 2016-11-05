@@ -13,7 +13,7 @@
     "appId": "com.mockbrian.Screenhive",
     "mac": {
       "category": "public.app-category.utilities",
-      "target": "zip"
+      "target": "dmg"
     },
     "win": {
       "target": "nsis"
