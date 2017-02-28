@@ -60,7 +60,7 @@ function InteractivePart(props) {
   const screen = state.screen
 
   const sharedButtonClass = C(
-    "text-shadow mv2 br1 b ph2 ttu ba white w-100 chunky-focus"
+    "pointer text-shadow mv2 br1 b ph2 ttu ba white w-100 chunky-focus"
   )
 
   const primaryButtonClass = C(
@@ -74,7 +74,7 @@ function InteractivePart(props) {
   )
 
   const outlineButtonClass = C(
-    "br1 bg-transparent white bn mv2 ph2 white w-100 chunky-focus"
+    "pointer br1 bg-transparent white bn mv2 ph2 white w-100 chunky-focus"
   )
 
   const doneScreen =
@@ -95,7 +95,7 @@ function InteractivePart(props) {
           disabled: !folder,
           onClick: openFolder
         },
-        $("span", {className: "bb b--white-60"},
+        $("span", {className: "pointer bb b--white-60"},
           folder || "No folder selected"
         )
       )

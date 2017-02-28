@@ -13,7 +13,7 @@ function $A(href, text) {
     event.preventDefault()
     H.openUrl(href)
   }
-  const className = "link white b--white-60 bb"
+  const className = "pointer link white b--white-60 bb"
   return $("a", {className, onClick, href}, text)
 }
 
