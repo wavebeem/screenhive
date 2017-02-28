@@ -74,7 +74,8 @@ function InteractivePart(props) {
   )
 
   const outlineButtonClass = C(
-    "pointer br1 bg-transparent white bn mv2 ph2 white w-100 chunky-focus"
+    "pointer br1 bg-transparent white bn mv2 ph2 white w-100 chunky-focus",
+    "truncate"
   )
 
   const doneScreen =
