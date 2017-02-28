@@ -13,7 +13,8 @@ function $A(href, text) {
     event.preventDefault()
     H.openUrl(href)
   }
-  return $("a", {onClick, href}, text)
+  const className = "link white b--white-60 bb"
+  return $("a", {className, onClick, href}, text)
 }
 
 const homePage = "https://screenhive.net"
@@ -21,18 +22,18 @@ const myPage = "http://mockbrian.com"
 
 function Screenhive(props) {
   const state = props.state
-  return $("main", {},
-    $("p", {className: "Flex-0-0"},
+  return $("main", {className: "flex flex-column fixed-full ph3 mw6 center"},
+    $("p", {className: "flex-none"},
       `Follow the `,
       $A(homePage, `Steam setup instructions`),
       ` to create a screenshot folder before using this app.`
     ),
-    $("p", {className: "Flex-0-0"},
+    $("p", {className: "flex-none"},
       `Your screenshots will be organized into folders
       based on the title of the game in Steam.`
     ),
     $(InteractivePart, {state}),
-    $("p", {className: "Flex-0-0 Info Copyright"},
+    $("p", {className: "flex-none tc"},
       `Copyright © 2016 `,
       $A(myPage, `Brian Mock`)
     )

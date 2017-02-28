@@ -2,137 +2,30 @@
   -webkit-user-select: none;
   user-select: none;
   cursor: default;
-  box-sizing: border-box;
-}
-
-:root {
-  --blue03: #1b2838;
-  --green01: #e6f2bb;
-  --green02: #799905;
-  --green02b: #91b317;
-  --blue01: #67c1f5;
-  --blue02: #264155;
-  --blue02b: #2c4a61;
 }
 
 html {
-  margin: 0;
-  padding: 0;
-  background-color: var(--blue03);
-  background-image:
-    linear-gradient(to bottom,
-    rgba(0, 0, 0, 0.0),
-    rgba(0, 0, 0, 0.4) 98%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: white;
-  min-height: 100vh;
-}
-
-body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Roboto",
-    "Oxygen",
-    "Ubuntu",
-    "Cantarell",
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    sans-serif;
   font-size: 20px;
 }
 
-main {
-  margin: 0;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
+.chunky-focus:focus {
+  outline: 0;
+  box-shadow:
+    0 0 0 2px black,
+    0 0 0 4px white;
+}
+
+.fixed-full {
   position: fixed;
   top: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   right: 0;
 }
 
-.Copyright {
-  text-align: center;
-}
 
-.Flex-1-1 {
-  flex: 1 1 auto;
-}
-
-.Flex-0-0 {
-  flex: 0 0 auto;
-}
-
-p {
-  margin-top: 0;
-  line-height: 1.4;
-}
-
-main > :last-child {
-  margin-bottom: 0;
-}
-
-h1 {
-  color: var(--blue01);
-}
-
-a {
-  color: var(--blue01);
-  text-decoration: none;
-  padding-bottom: 1px;
-  border-bottom: 1px solid currentColor;
-}
-
-a:hover {
-  text-shadow: 0 0 2px black;
-  color: #c9e5f5;
-  cursor: pointer;
-}
-
-.FolderDisplay {
-  background: transparent;
-  font: inherit;
-  box-shadow: none;
-  border: 0;
-  padding: 0;
-  margin-top: 0.5em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 0 !important;
-  padding-bottom: 1px;
-  border-bottom: 1px solid currentColor !important;
-  width: auto !important;
-}
-
-.FolderDisplay:hover {
-  cursor: pointer;
-  text-shadow: 0 0 2px black;
-}
-
-.Info a,
-.Info {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.Info a:hover {
-  color: white;
-}
-
-.tc {
-  text-align: center;
-}
-
-.dib {
-  display: inline-block;
+.text-shadow {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
 }
 
 .Spinner {
@@ -153,106 +46,4 @@ a:hover {
   100% {
     transform: rotate(360deg);
   }
-}
-
-input,
-button {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-}
-
-button {
-  font: inherit;
-}
-
-.ButtonOuter {
-  border: 0;
-  padding: 1px;
-
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.10);
-  background-color: #666;
-  background-image:
-    linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.0),
-      rgba(0, 0, 0, 0.2) 100%);
-}
-
-.ButtonOuter,
-.ButtonInner {
-  cursor: pointer;
-  border-radius: 0.1em;
-}
-
-.ButtonInner {
-  padding: 0.5em 1em;
-  background: rgba(0, 0, 0, 0.1);
-}
-
-button,
-a {
-  transition: all 100ms;
-}
-
-
-button:disabled {
-  cursor: default;
-}
-
-a:focus,
-button:focus {
-  outline: 0;
-  box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.9);
-}
-
-.SecondaryButton {
-  background-color: var(--blue02);
-  color: white;
-  background-image:
-    linear-gradient(to bottom,
-      var(--blue01),
-      var(--blue02) 50%);
-}
-
-.SecondaryButton .ButtonInner {
-  background-color: var(--blue02);
-}
-
-.SecondaryButton:hover .ButtonInner {
-  background-color: var(--blue02b);
-}
-
-.MainButton {
-  font-weight: bold;
-  margin-top: 0.5em;
-  background-color: var(--green02);
-  color: white;
-  background-image:
-    linear-gradient(to bottom,
-      var(--green01),
-      var(--green02) 50%);
-  font-size: 2rem;
-}
-
-.MainButton .ButtonInner {
-  background: var(--green02);
-}
-
-.MainButton:hover .ButtonInner {
-  background-color: var(--green02b);
-}
-
-.MainButton:disabled {
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.ButtonOuter:disabled {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
-  background: transparent;
-}
-
-.ButtonOuter:disabled .ButtonInner {
-  background: transparent;
 }

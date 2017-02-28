@@ -1,5 +1,6 @@
 const ReactRedux = require("react-redux")
 const React = require("react")
+const C = require("classnames")
 const Conf = require("./conf")
 const migrate = require("./migrate")
 const H = require("./helpers")
@@ -58,40 +59,58 @@ function InteractivePart(props) {
   const folder = state.folder || null
   const screen = state.screen
 
+  const sharedButtonClass = C(
+    "text-shadow mv2 br1 b ph2 ttu ba white w-100 chunky-focus"
+  )
+
+  const primaryButtonClass = C(
+    "bg-green b--white-30 pv3 f3",
+    sharedButtonClass
+  )
+
+  const secondaryButtonClass = C(
+    "bg-blue b--white-20 pv2",
+    sharedButtonClass
+  )
+
+  const outlineButtonClass = C(
+    "br1 bg-transparent white bn mv2 ph2 white w-100 chunky-focus"
+  )
+
   const doneScreen =
     $("div", {},
-      $("button", {className: "MainButton ButtonOuter", onClick: viewScreenshots},
-        $("div", {className: "ButtonInner"}, `View screenshots`)
+      $("button", {className: primaryButtonClass, onClick: viewScreenshots},
+        `View screenshots`
       )
     )
 
   const folderPicker =
     $("div", {},
-      $("button", {className: "SecondaryButton ButtonOuter", onClick: pickDir},
-        $("div", {className: "ButtonInner"},
+      $("button", {className: secondaryButtonClass, onClick: pickDir},
           `Choose screenshot folder`
-        )
       ),
       $("button",
         {
-          className: "FolderDisplay Info",
+          className: outlineButtonClass,
           disabled: !folder,
           onClick: openFolder
         },
-        folder || "No folder selected"
+        $("span", {className: "bb b--white-60"},
+          folder || "No folder selected"
+        )
       )
     )
 
   const mainButton =
     $("button",
       {
-        className: "MainButton ButtonOuter",
+        className: primaryButtonClass,
         disabled: !folder || screen === "working",
         onClick: start
       },
-      $("div", {className: "ButtonInner"},
-        screen === "working" ? `Please wait…` : `Organize`
-      )
+      screen === "working"
+        ? `Please wait…`
+        : `Organize`
     )
 
   const startScreen =
@@ -105,7 +124,7 @@ function InteractivePart(props) {
       $("div", {className: "Spinner dib"})
     )
 
-  return $("div", {className: "Flex-1-1"},
+  return $("div", {className: "flex-auto"},
     screen === "start" ? startScreen : null,
     screen === "working" ? spinner : null,
     screen === "done" ? doneScreen : null
