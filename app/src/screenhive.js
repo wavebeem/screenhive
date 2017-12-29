@@ -1,7 +1,7 @@
 const React = require("react");
 
 const Conf = require("./conf");
-const InteractivePart = require("./interactive-part");
+const App = require("./app");
 const H = require("./helpers");
 
 const $ = React.createElement;
@@ -57,7 +57,7 @@ class Screenhive extends React.Component {
           `Your screenshots will be organized into folders
         based on the title of the game in Steam.`
         ]),
-        $(InteractivePart, props),
+        $(App, props),
         $("p", { className: "flex-none tc" }, [
           `Copyright © 2018 `,
           $A(myPage, `Brian Mock`)
