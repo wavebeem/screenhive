@@ -2,6 +2,9 @@
   "private": true,
   "scripts": {
     "postinstall": "install-app-deps",
+    "make:js": "echo TODO",
+    "prettify": "prettier --write 'app/src/**/*.js' app/style.css",
+    "prestart": "npm run -s prettify && npm run -s make:js",
     "start": "electron app",
     "pack": "build --dir",
     "ico": "convert img/Screenhive-*px.png build/icon.ico",
@@ -23,8 +26,9 @@
     }
   },
   "devDependencies": {
-    "electron": "^1.3.5",
+    "electron": "^1.8.1",
     "electron-builder": "^6.7.3",
-    "eslint": "^3.5.0"
+    "eslint": "^3.19.0",
+    "prettier": "1.9.2"
   }
 }
