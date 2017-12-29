@@ -1,8 +1,9 @@
 const React = require("react");
 
+const Steam = require("../steam");
+const SteamPNG = require("../steam-png");
 const Button = require("../button");
 const H = require("../helpers");
-const migrate = require("../migrate");
 
 const $ = React.createElement;
 
@@ -28,13 +29,10 @@ function Start(props) {
 
   function start() {
     setRoute("working");
-    migrate(folder)
-      .then(done)
+    SteamPNG.organize(folder)
+      .then(() => Steam.organize(steamRoot, folder))
+      .then(() => setRoute("done"))
       .catch(fail);
-  }
-
-  function done() {
-    setRoute("done");
   }
 
   function fail(err) {

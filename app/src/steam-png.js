@@ -59,7 +59,7 @@ function processFiles(files) {
   return Promise.all(results).then(() => n);
 }
 
-function migrate(dir) {
+function organize(dir) {
   return getSteamData()
     .then(initializeNames)
     .then(() => dir)
@@ -67,4 +67,4 @@ function migrate(dir) {
     .then(processFiles);
 }
 
-module.exports = migrate;
+exports.organize = organize;

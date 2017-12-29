@@ -94,8 +94,9 @@ function looksSteamy(dir) {
 }
 
 function organize(steamRoot, folder) {
-  folder;
   // TODO
+  folder;
+  return Promise.resolve(undefined);
 }
 
 exports.findRoot = findRoot;
