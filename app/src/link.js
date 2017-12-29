@@ -11,7 +11,7 @@ function Link(props) {
     H.openUrl(url);
   }
   const className = "pointer link white b--white-60 bb";
-  return $("a", { className, onClick, url }, children);
+  return $("a", { className, onClick, href: url }, children);
 }
 
 module.exports = Link;
