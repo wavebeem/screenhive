@@ -3,6 +3,28 @@
 // also truncates the filename at 255 characters because apparently lots of
 // things have problems with that (even Linux).
 
+// -*- TODO -*-
+// Switch from "move" to "copy" since we're gonna use the Steam screenshot
+// directories inside Steam's internal stuff and we don't want to mess with it.
+// This means that app time will scale linearly with the number of screenshots
+// you take which is not cool, but that's life. Thanks Valve for your bad app.
+// Also we need to have smart detection logic for the actual Steam installation
+// location.
+//
+// Steam is generally installed to one of these locations:
+//
+//     ~/Library/Application Support/Steam
+//     C:\Program Files\Steam
+//     ?:\Steam
+//
+// Where "?:" represents any drive C through Z.
+//
+// From the Steam root, screenshots can be found here:
+//
+//     <SteamRoot>/userdata/<UserID>/760/remote/<AppID>/screenshots
+//
+// 760 is the AppID for "Steam Screenshots"
+
 const bluebird = require("bluebird");
 const path = require("path");
 const fs = bluebird.promisifyAll(require("fs"));
