@@ -19,7 +19,7 @@ function write(data) {
   try {
     fs.writeFileSync(name, JSON.stringify(data, null, 2), UTF8);
   } catch (err) {
-    // Ignore
+    console.error("Failed to write config file!");
   }
 }
 

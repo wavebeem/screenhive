@@ -1,12 +1,10 @@
-const ReactRedux = require("react-redux");
 const React = require("react");
+
+const Conf = require("./conf");
 const InteractivePart = require("./interactive-part");
 const H = require("./helpers");
-const $ = React.createElement;
 
-function mapStateToProps(state) {
-  return { state };
-}
+const $ = React.createElement;
 
 function $A(href, text) {
   function onClick(event) {
@@ -20,28 +18,53 @@ function $A(href, text) {
 const homePage = "https://screenhive.net";
 const myPage = "http://mockbrian.com";
 
-function Screenhive(props) {
-  const state = props.state;
-  return $(
-    "main",
-    { className: "flex flex-column fixed-full ph3 mw6 center" },
-    [
-      $("p", { className: "flex-none" }, [
-        `Follow the `,
-        $A(homePage, `Steam setup instructions`),
-        ` to create a screenshot folder before using this app.`
-      ]),
-      $("p", { className: "flex-none" }, [
-        `Your screenshots will be organized into folders
-      based on the title of the game in Steam.`
-      ]),
-      $(InteractivePart, { state }),
-      $("p", { className: "flex-none tc" }, [
-        `Copyright © 2018 `,
-        $A(myPage, `Brian Mock`)
-      ])
-    ]
-  );
+class Screenhive extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      route: "start",
+      folder: Conf.read().folder
+    };
+    this.setRoute = this.setRoute.bind(this);
+    this.setFolder = this.setFolder.bind(this);
+  }
+
+  setRoute(route) {
+    this.setState({ route });
+  }
+
+  setFolder(folder) {
+    this.setState({ folder });
+    Conf.write({ folder });
+  }
+
+  render() {
+    const props = {
+      state: this.state,
+      setRoute: this.setRoute,
+      setFolder: this.setFolder
+    };
+    return $(
+      "main",
+      { className: "flex flex-column fixed-full ph3 mw6 center" },
+      [
+        $("p", { className: "flex-none" }, [
+          `Follow the `,
+          $A(homePage, `Steam setup instructions`),
+          ` to create a screenshot folder before using this app.`
+        ]),
+        $("p", { className: "flex-none" }, [
+          `Your screenshots will be organized into folders
+        based on the title of the game in Steam.`
+        ]),
+        $(InteractivePart, props),
+        $("p", { className: "flex-none tc" }, [
+          `Copyright © 2018 `,
+          $A(myPage, `Brian Mock`)
+        ])
+      ]
+    );
+  }
 }
 
-module.exports = ReactRedux.connect(mapStateToProps)(Screenhive);
+module.exports = Screenhive;

@@ -1,6 +1,4 @@
-const electron = require("electron");
-const shell = electron.shell;
-const remote = electron.remote;
+const { shell, remote } = require("electron");
 
 const properties = ["openDirectory"];
 

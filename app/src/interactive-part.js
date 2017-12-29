@@ -1,21 +1,17 @@
-const ReactRedux = require("react-redux");
 const React = require("react");
 const C = require("classnames");
-const Conf = require("./conf");
+
 const migrate = require("./migrate");
 const H = require("./helpers");
+
 const $ = React.createElement;
 
 function InteractivePart(props) {
-  function update(key, value) {
-    dispatch({ type: "Update", key, value });
-  }
+  const { setFolder, setRoute } = props;
+  const { folder, route } = props.state;
 
   function pickDir() {
-    H.pickDir().then(folder => {
-      update("folder", folder);
-      Conf.write({ folder });
-    });
+    H.pickDir().then(setFolder);
   }
 
   function openFolder() {
@@ -23,14 +19,14 @@ function InteractivePart(props) {
   }
 
   function start() {
-    update("screen", "working");
+    setRoute("working");
     migrate(folder)
       .then(done)
       .catch(fail);
   }
 
   function done() {
-    update("screen", "done");
+    setRoute("done");
   }
 
   function fail(err) {
@@ -46,18 +42,13 @@ function InteractivePart(props) {
   }
 
   function cleanup() {
-    update("screen", "start");
+    setRoute("start");
   }
 
   function viewScreenshots() {
     cleanup();
     openFolder();
   }
-
-  const dispatch = props.dispatch;
-  const state = props.state;
-  const folder = state.folder || null;
-  const screen = state.screen;
 
   const sharedButtonClass = C(
     "pointer text-shadow mv2 br1 b ph2 ttu ba white w-100 chunky-focus"
@@ -112,10 +103,10 @@ function InteractivePart(props) {
     "button",
     {
       className: primaryButtonClass,
-      disabled: !folder || screen === "working",
+      disabled: !folder || route === "working",
       onClick: start
     },
-    screen === "working" ? `Please wait…` : `Organize`
+    route === "working" ? `Please wait…` : `Organize`
   );
 
   const startScreen = $("div", {}, folderPicker, folder ? mainButton : null);
@@ -129,10 +120,10 @@ function InteractivePart(props) {
   return $(
     "div",
     { className: "flex-auto" },
-    screen === "start" ? startScreen : null,
-    screen === "working" ? spinner : null,
-    screen === "done" ? doneScreen : null
+    route === "start" ? startScreen : null,
+    route === "working" ? spinner : null,
+    route === "done" ? doneScreen : null
   );
 }
 
-module.exports = ReactRedux.connect()(InteractivePart);
+module.exports = InteractivePart;
