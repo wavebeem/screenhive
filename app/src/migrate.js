@@ -25,6 +25,10 @@
 //
 // 760 is the AppID for "Steam Screenshots"
 
+// -*- TODO -*-
+//
+// Drop Bluebird and switch to fs-extra
+
 const bluebird = require("bluebird");
 const path = require("path");
 const fs = bluebird.promisifyAll(require("fs"));
