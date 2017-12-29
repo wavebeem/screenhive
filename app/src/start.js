@@ -3,7 +3,7 @@ const { app, BrowserWindow } = require("electron");
 const package = require("../package.json");
 
 let mainWindow = undefined;
-const DEBUG = false;
+const DEBUG = true;
 const width = DEBUG ? 1280 : 400;
 const height = DEBUG ? 800 : 500;
 

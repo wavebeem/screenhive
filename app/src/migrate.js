@@ -25,15 +25,8 @@
 //
 // 760 is the AppID for "Steam Screenshots"
 
-// -*- TODO -*-
-//
-// Drop Bluebird and switch to fs-extra
-
-const bluebird = require("bluebird");
 const path = require("path");
-const fs = bluebird.promisifyAll(require("fs"));
-const mv = bluebird.promisify(require("mv"));
-const request = require("request-promise");
+const fs = require("fs-extra");
 const sanitize = require("sanitize-filename");
 
 const SCREENSHOT_REGEXP = /[0-9]+_.*[.]png/;
@@ -41,8 +34,13 @@ const STEAM_URL = "https://api.steampowered.com/ISteamApps/GetAppList/v0001/";
 
 const folderNames = {};
 
-function getJSON(uri) {
-  return request.get({ uri, json: true });
+function getSteamData() {
+  return fetch(STEAM_URL).then(resp => {
+    if (!resp.ok) {
+      throw new Error("failed to fetch Steam API data");
+    }
+    return resp.json();
+  });
 }
 
 function looksLikeSteamScreenshot(name) {
@@ -65,7 +63,7 @@ function initializeNames(body) {
 
 function listFiles(dir) {
   return fs
-    .readdirAsync(dir)
+    .readdirSync(dir)
     .filter(looksLikeSteamScreenshot)
     .map(f => path.resolve(dir, f));
 }
@@ -78,13 +76,13 @@ function processFiles(files) {
     const id = getID(base);
     const name = getFolderName(id);
     const dest = path.resolve(dir, name, base);
-    return mv(file, dest, { mkdirp: true });
+    return fs.move(file, dest, { overwrite: true });
   });
   return Promise.all(results).then(() => n);
 }
 
 function migrate(dir) {
-  return getJSON(STEAM_URL)
+  return getSteamData()
     .then(initializeNames)
     .then(() => dir)
     .then(listFiles)
