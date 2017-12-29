@@ -7,15 +7,23 @@ const migrate = require("../migrate");
 const $ = React.createElement;
 
 function Start(props) {
-  const { setFolder, setRoute } = props;
-  const { folder } = props.state;
+  const { setFolder, setRoute, setSteamRoot } = props;
+  const { folder, steamRoot } = props.state;
 
   function pickDir() {
     H.pickDir().then(setFolder);
   }
 
+  function pickSteamRoot() {
+    H.pickDir().then(setSteamRoot);
+  }
+
   function openFolder() {
     H.openFile(folder);
+  }
+
+  function openSteamRoot() {
+    H.openFile(steamRoot);
   }
 
   function start() {
@@ -41,9 +49,28 @@ function Start(props) {
     H.showMessageBox(options, () => {});
   }
 
-  const folderPicker = $(
+  const steamRootPicker = $(
     "div",
     {},
+    $(
+      Button,
+      { type: "secondary", onClick: pickSteamRoot },
+      "Choose Steam folder"
+    ),
+    $(
+      Button,
+      {
+        type: "link",
+        disabled: !steamRoot,
+        onClick: openSteamRoot
+      },
+      steamRoot || "No folder selected"
+    )
+  );
+
+  const folderPicker = $(
+    "div",
+    { className: "mb4" },
     $(
       Button,
       { type: "secondary", onClick: pickDir },
@@ -70,7 +97,13 @@ function Start(props) {
     "Organize"
   );
 
-  return $("div", {}, folderPicker, folder ? mainButton : null);
+  return $(
+    "div",
+    {},
+    steamRootPicker,
+    folderPicker,
+    folder ? mainButton : null
+  );
 }
 
 module.exports = Start;

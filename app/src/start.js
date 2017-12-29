@@ -3,9 +3,9 @@ const { app, BrowserWindow } = require("electron");
 const package = require("../package.json");
 
 let mainWindow = undefined;
-const DEBUG = true;
+const DEBUG = false;
 const width = DEBUG ? 1280 : 400;
-const height = DEBUG ? 800 : 500;
+const height = DEBUG ? 800 : 550;
 
 const options = {
   width,
@@ -19,7 +19,7 @@ const options = {
 function createWindow() {
   mainWindow = new BrowserWindow(options);
   mainWindow.setMenu(null);
-  mainWindow.loadURL("file://" + __dirname + "/../index.html");
+  mainWindow.loadURL(`file://${__dirname}/../index.html`);
   mainWindow.setTitle(package.productName + " " + package.version);
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();

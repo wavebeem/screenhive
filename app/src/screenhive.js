@@ -3,6 +3,7 @@ const React = require("react");
 const Link = require("./link");
 const Conf = require("./conf");
 const App = require("./app");
+const Steam = require("./Steam");
 
 const $ = React.createElement;
 
@@ -12,12 +13,16 @@ const myPage = "https://mockbrian.com";
 class Screenhive extends React.Component {
   constructor(props) {
     super(props);
+    const { steamRoot = Steam.findRoot(), folder } = Conf.read();
     this.state = {
-      route: "start",
-      folder: Conf.read().folder
+      steamRoot,
+      folder,
+      route: "start"
     };
     this.setRoute = this.setRoute.bind(this);
     this.setFolder = this.setFolder.bind(this);
+    this.setSteamRoot = this.setSteamRoot.bind(this);
+    this.saveConf = this.saveConf.bind(this);
   }
 
   setRoute(route) {
@@ -25,14 +30,23 @@ class Screenhive extends React.Component {
   }
 
   setFolder(folder) {
-    this.setState({ folder });
-    Conf.write({ folder });
+    this.setState({ folder }, this.saveConf);
+  }
+
+  setSteamRoot(steamRoot) {
+    this.setState({ steamRoot }, this.saveConf);
+  }
+
+  saveConf() {
+    const { folder, steamRoot } = this.state;
+    Conf.write({ folder, steamRoot });
   }
 
   render() {
     const props = {
       state: this.state,
       setRoute: this.setRoute,
+      setSteamRoot: this.setSteamRoot,
       setFolder: this.setFolder
     };
     return $(
@@ -44,11 +58,6 @@ class Screenhive extends React.Component {
         "Follow the ",
         $(Link, { url: homePage }, "Steam setup instructions"),
         " to create a screenshot folder before using this app."
-      ),
-      $(
-        "p",
-        { className: "flex-none" },
-        "Your screenshots will be organized into folders based on the title of the game in Steam."
       ),
       $(App, props),
       $(
