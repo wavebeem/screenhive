@@ -68,7 +68,7 @@ function Start(props) {
 
   const folderPicker = $(
     "div",
-    { className: "mb4" },
+    {},
     $(
       Button,
       { type: "secondary", onClick: pickDir },

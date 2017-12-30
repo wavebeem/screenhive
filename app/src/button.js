@@ -4,20 +4,21 @@ const C = require("classnames");
 const $ = React.createElement;
 
 const C_SHARED = C(
-  "pointer",
+  "pointer glow o-90",
   "text-shadow white ttu b",
-  "br1 ba",
-  "mv2 ph2 w-100",
-  "chunky-focus"
-);
-const C_PRIMARY = C("bg-green b--white-30 pv3 f3", C_SHARED);
-const C_SECONDARY = C("bg-blue b--white-20 pv2", C_SHARED);
-const C_LINK = C(
-  "bg-transparent white",
   "br1 bn",
-  "truncate",
-  "pointer",
   "mv2 ph2 w-100",
+  "chunky-focus",
+  "button-shadow"
+);
+const C_PRIMARY = C("bg-green pv3 f3", C_SHARED);
+const C_SECONDARY = C("bg-blue pv2", C_SHARED);
+const C_LINK = C(
+  "bg-transparent blue",
+  "br1 ba bw1 b--blue",
+  "truncate",
+  "pointer glow o-90",
+  "mv2 ph2 pv2 w-100",
   "chunky-focus"
 );
 
@@ -37,11 +38,7 @@ function Button(props) {
     children
   } = props;
   const className = classes[type];
-  const text =
-    type === "link"
-      ? $("span", { className: "pointer bb b--white-60" }, children)
-      : children;
-  return $("button", { className, disabled, onClick }, text);
+  return $("button", { className, disabled, onClick }, children);
 }
 
 module.exports = Button;

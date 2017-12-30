@@ -3,9 +3,9 @@ const { app, BrowserWindow } = require("electron");
 const package = require("../package.json");
 
 let mainWindow = undefined;
-const DEBUG = true;
-const width = DEBUG ? 1280 : 400;
-const height = DEBUG ? 800 : 550;
+const DEBUG = false;
+const width = DEBUG ? 800 : 400;
+const height = DEBUG ? 600 : 550;
 
 const options = {
   width,

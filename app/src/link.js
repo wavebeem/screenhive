@@ -10,7 +10,7 @@ function Link(props) {
     event.preventDefault();
     H.openUrl(url);
   }
-  const className = "pointer link white b--white-60 bb";
+  const className = "pointer link o-80 glow dark-blue b--black-30 b bb";
   return $("a", { className, onClick, href: url }, children);
 }
 

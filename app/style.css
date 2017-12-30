@@ -10,7 +10,7 @@ html {
 
 .chunky-focus:focus {
   outline: 0;
-  box-shadow: 0 0 0 2px black, 0 0 0 4px white;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px black;
 }
 
 .fixed-full {
@@ -23,6 +23,10 @@ html {
 
 .text-shadow {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.button-shadow {
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Spinner {
