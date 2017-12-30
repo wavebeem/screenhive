@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 
-const package = require("../package.json");
+const Package = require("../package.json");
 
 let mainWindow = undefined;
 const DEBUG = false;
@@ -20,7 +20,7 @@ function createWindow() {
   mainWindow = new BrowserWindow(options);
   mainWindow.setMenu(null);
   mainWindow.loadURL(`file://${__dirname}/../index.html`);
-  mainWindow.setTitle(package.productName + " " + package.version);
+  mainWindow.setTitle(Package.productName);
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
   });

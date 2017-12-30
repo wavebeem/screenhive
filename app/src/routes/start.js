@@ -47,6 +47,12 @@ function Start(props) {
     H.showMessageBox(options, () => {});
   }
 
+  const aboutPageButton = $(
+    Button,
+    { type: "round", onClick: () => setRoute("about") },
+    "About"
+  );
+
   const steamRootPicker = $(
     "div",
     {},
@@ -98,6 +104,7 @@ function Start(props) {
   return $(
     "div",
     {},
+    $("div", {}, aboutPageButton),
     steamRootPicker,
     folderPicker,
     folder ? mainButton : null

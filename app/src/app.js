@@ -3,13 +3,15 @@ const React = require("react");
 const Start = require("./routes/start");
 const Working = require("./routes/working");
 const Done = require("./routes/done");
+const About = require("./routes/about");
 
 const $ = React.createElement;
 
 const routeMap = {
   start: Start,
   working: Working,
-  done: Done
+  done: Done,
+  about: About
 };
 
 function pickRoute(props) {

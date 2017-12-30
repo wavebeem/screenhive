@@ -5,16 +5,22 @@ const $ = React.createElement;
 
 const C_SHARED = C(
   "pointer glow o-90",
-  "text-shadow white ttu b",
-  "br1 bn",
+  "ttu b",
+  "bn",
   "mv2 ph2 w-100",
-  "chunky-focus",
-  "button-shadow"
+  "chunky-focus"
 );
-const C_PRIMARY = C("bg-green pv3 f3", C_SHARED);
-const C_SECONDARY = C("bg-blue pv2", C_SHARED);
+const C_PRIMARY = C(
+  C_SHARED,
+  "text-shadow white bg-green pv3 f3 br1 button-shadow"
+);
+const C_SECONDARY = C(
+  C_SHARED,
+  "text-shadow white bg-blue pv2 br1 button-shadow"
+);
+const C_ROUND = C(C_SHARED, "bg-light-gray pv2 br1 black");
 const C_LINK = C(
-  "bg-transparent blue",
+  "bg-transparent dark-blue",
   "br1 ba bw1 b--blue",
   "truncate",
   "pointer glow o-90",
@@ -25,7 +31,8 @@ const C_LINK = C(
 const classes = {
   primary: C_PRIMARY,
   secondary: C_SECONDARY,
-  link: C_LINK
+  link: C_LINK,
+  round: C_ROUND
 };
 
 const noop = () => {};
