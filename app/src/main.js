@@ -2,6 +2,7 @@ const React = require("react");
 const { render } = require("react-dom");
 
 const Screenhive = require("./screenhive");
+window.console = require("./console");
 
 const $ = React.createElement;
 

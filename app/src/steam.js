@@ -23,8 +23,10 @@
 const path = require("path");
 const fs = require("fs-extra");
 const sanitize = require("sanitize-filename");
+const glob = require("glob");
 
-const SCREENSHOT_REGEXP = /[0-9]+_.*[.]png/;
+// const { log } = require("./console");
+
 const STEAM_URL = "https://api.steampowered.com/ISteamApps/GetAppList/v0001/";
 
 const folderNames = {};
@@ -36,10 +38,6 @@ function getSteamData() {
     }
     return resp.json();
   });
-}
-
-function looksLikeSteamScreenshot(name) {
-  return SCREENSHOT_REGEXP.test(name);
 }
 
 function getFolderName(id) {
@@ -66,8 +64,11 @@ function findRoot() {
 }
 
 function driveLetters() {
-  const a = "a".charCodeAt(0);
-  return Array.from({ length: 26 }, (x, i) => String.fromCharCode(a + i) + ":");
+  const start = "C".charCodeAt(0);
+  return Array.from(
+    { length: 24 },
+    (x, i) => String.fromCharCode(start + i) + ":/"
+  );
 }
 
 function possibleDirs() {
@@ -75,28 +76,46 @@ function possibleDirs() {
     const home = process.env.HOME || "";
     const macDir = path.resolve(home, "Library/Application Support/Steam");
     return [macDir];
-  } else {
+  } else if (process.platform === "win32") {
     const dirs = [];
     for (const drive of driveLetters()) {
       for (const dir of ["Program Files", ""]) {
-        dirs.push(path.resolve(drive, dir));
+        dirs.push(path.resolve(drive, dir, "Steam"));
       }
     }
     return dirs;
   }
+  return [];
 }
 
 function looksSteamy(dir) {
-  return (
-    fs.existsSync(path.resolve(dir, "steamapps")) &&
-    fs.existsSync(path.resolve(dir, "userdata"))
-  );
+  const dirs = ["steamapps", "userdata"];
+  return dirs.map(d => path.resolve(dir, d)).every(d => fs.existsSync(d));
+}
+
+function findScreenshots(steamRoot) {
+  return new Promise(resolve => {
+    // 760 is the ID of the app "Steam Screenshots"
+    const pattern = "/userdata/*/760/remote/*/screenshots/*.jpg";
+    glob(pattern, { root: steamRoot }, (err, files) => {
+      if (err) {
+        throw err;
+      }
+      resolve(files);
+    });
+  });
 }
 
 function organize(steamRoot, folder) {
   // TODO
   folder;
-  return Promise.resolve(undefined);
+  findScreenshots(steamRoot).then(files => {
+    return files.reduce((p, file) => {
+      return p.then(() => {
+        console.log("COPY THE FILE OVER? " + file);
+      });
+    }, Promise.resolve(undefined));
+  });
 }
 
 exports.findRoot = findRoot;
