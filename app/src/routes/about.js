@@ -19,6 +19,7 @@ function About(props) {
     "div",
     {},
     $("div", {}, $(Button, { type: "round", onClick: goBack }, "Back")),
+    $("p", { className: "f3 b" }, `${Package.productName} ${Package.version}`),
     $(
       "p",
       {},
@@ -26,7 +27,6 @@ function About(props) {
       $(Link, { url: homePage }, "Steam setup instructions"),
       " to create a screenshot folder before using this app."
     ),
-    $("p", { className: "b" }, `${Package.productName} ${Package.version}`),
     $("p", {}, "Copyright © 2018 ", $(Link, { url: myPage }, "Brian Mock"))
   );
 }

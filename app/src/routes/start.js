@@ -103,11 +103,10 @@ function Start(props) {
 
   return $(
     "div",
-    {},
-    $("div", {}, aboutPageButton),
-    steamRootPicker,
-    folderPicker,
-    folder ? mainButton : null
+    { className: "min-h-100 flex flex-column justify-between" },
+    aboutPageButton,
+    $("div", {}, folderPicker, steamRootPicker),
+    mainButton
   );
 }
 

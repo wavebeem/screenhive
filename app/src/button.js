@@ -4,7 +4,7 @@ const C = require("classnames");
 const $ = React.createElement;
 
 const C_SHARED = C(
-  "pointer glow o-90",
+  "pointer o-90",
   "ttu b",
   "bn",
   "mv2 ph2 w-100",
@@ -23,7 +23,7 @@ const C_LINK = C(
   "bg-transparent dark-blue",
   "br1 ba bw1 b--blue",
   "truncate",
-  "pointer glow o-90",
+  "pointer o-90",
   "mv2 ph2 pv2 w-100",
   "chunky-focus"
 );
@@ -44,7 +44,7 @@ function Button(props) {
     onClick = noop,
     children
   } = props;
-  const className = classes[type];
+  const className = C(classes[type], disabled ? "o-30" : "glow");
   return $("button", { className, disabled, onClick }, children);
 }
 

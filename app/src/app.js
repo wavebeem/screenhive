@@ -14,16 +14,12 @@ const routeMap = {
   about: About
 };
 
-function pickRoute(props) {
+function App(props) {
   const { route } = props.state;
   if (routeMap.hasOwnProperty(route)) {
     return $(routeMap[route], props);
   }
   return $("div", null, `Invalid route "${route}"`);
-}
-
-function App(props) {
-  return $("div", { className: "flex-auto" }, pickRoute(props));
 }
 
 module.exports = App;
