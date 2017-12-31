@@ -45,7 +45,7 @@ class Screenhive extends React.Component {
       setSteamRoot: this.setSteamRoot,
       setFolder: this.setFolder
     };
-    const className = "flex flex-column fixed-full ph3 pv2 mw6 center";
+    const className = "flex flex-column fixed-full ph2 pv1 mw6 center";
     return $("main", { className }, $(App, props));
   }
 }

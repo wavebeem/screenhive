@@ -16,7 +16,8 @@ function Done(props) {
 
   return $(
     "div",
-    { className: "min-h-100 flex flex-column justify-center" },
+    { className: "min-h-100 flex flex-column justify-center pb5" },
+    $("p", { className: "tc f3 b" }, "Mission Complete"),
     $(Button, { type: "primary", onClick: viewScreenshots }, "View screenshots")
   );
 }

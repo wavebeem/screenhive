@@ -7,7 +7,7 @@ const C_SHARED = C(
   "pointer bg-animate",
   "ttu b",
   "bn br1",
-  "mv2 ph2 w-100",
+  "mv1 ph2 w-100",
   "chunky-focus"
 );
 const C_PRIMARY = C(C_SHARED, "white bg-green pv3 f3");
@@ -18,7 +18,7 @@ const C_OUTLINE = C(
   "br1 ba b--blue",
   "truncate",
   "pointer",
-  "mv2 ph2 pv2 w-100",
+  "mv1 ph2 pv2 w-100",
   "chunky-focus"
 );
 
