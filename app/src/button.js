@@ -18,8 +18,8 @@ const C_SECONDARY = C(
   C_SHARED,
   "text-shadow white bg-blue pv2 br1 button-shadow"
 );
-const C_ROUND = C(C_SHARED, "bg-light-gray pv2 br1 black");
-const C_LINK = C(
+const C_SUBTLE = C(C_SHARED, "bg-light-gray pv2 br1 black");
+const C_OUTLINE = C(
   "bg-transparent dark-blue",
   "br1 ba bw1 b--blue",
   "truncate",
@@ -31,8 +31,8 @@ const C_LINK = C(
 const classes = {
   primary: C_PRIMARY,
   secondary: C_SECONDARY,
-  link: C_LINK,
-  round: C_ROUND
+  outline: C_OUTLINE,
+  subtle: C_SUBTLE
 };
 
 const noop = () => {};

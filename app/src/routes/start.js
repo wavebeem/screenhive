@@ -49,7 +49,7 @@ function Start(props) {
 
   const aboutPageButton = $(
     Button,
-    { type: "round", onClick: () => setRoute("about") },
+    { type: "subtle", onClick: () => setRoute("about") },
     "About"
   );
 
@@ -64,7 +64,7 @@ function Start(props) {
     $(
       Button,
       {
-        type: "link",
+        type: "outline",
         disabled: !steamRoot,
         onClick: openSteamRoot
       },
@@ -83,7 +83,7 @@ function Start(props) {
     $(
       Button,
       {
-        type: "link",
+        type: "outline",
         disabled: !folder,
         onClick: openFolder
       },

@@ -18,7 +18,7 @@ function About(props) {
   return $(
     "div",
     {},
-    $("div", {}, $(Button, { type: "round", onClick: goBack }, "Back")),
+    $("div", {}, $(Button, { type: "subtle", onClick: goBack }, "Back")),
     $("p", { className: "f3 b" }, `${Package.productName} ${Package.version}`),
     $(
       "p",
