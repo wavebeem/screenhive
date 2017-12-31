@@ -91,7 +91,7 @@ function looksLikeSteamScreenshot(name) {
 
 function organizeJPEGs(steamData, steamRoot, folder) {
   return findJPEGs(steamRoot).then(files => {
-    return processFiles(folder, files, copy);
+    return processJPEG(folder, files);
   });
 }
 
@@ -102,30 +102,43 @@ function findPNGs(dir) {
     .then(files => files.map(f => path.resolve(dir, f)));
 }
 
-function processFiles(folder, files, fn) {
+function processPNG(folder, files) {
   const n = files.length;
   const results = files.map(file => {
     const base = path.basename(file);
     const id = getID(base);
     const name = getFolderName(id);
     const dest = path.resolve(folder, name, base);
-    return fn(file, dest);
+    return move(file, dest);
+  });
+  return Promise.all(results).then(() => n);
+}
+
+function processJPEG(folder, files) {
+  const n = files.length;
+  const results = files.map(file => {
+    const chunks = path.resolve(file, "../..").split(path.sep);
+    const id = chunks[chunks.length - 1];
+    const base = path.basename(file);
+    const name = getFolderName(id);
+    const dest = path.resolve(folder, name, base);
+    return copy(file, dest);
   });
   return Promise.all(results).then(() => n);
 }
 
 function move(src, dest) {
-  // return fs.move(src, dest, { overwrite: true });
-  console.log(`MOVE ${src} => ${dest}`);
+  return fs.move(src, dest, { overwrite: true });
+  // console.log(`MOVE ${src} => ${dest}`);
 }
 
 function copy(src, dest) {
-  // return fs.copy(src, dest, { overwrite: false });
-  console.log(`COPY ${src} => ${dest}`);
+  return fs.copy(src, dest, { overwrite: false });
+  // console.log(`COPY ${src} => ${dest}`);
 }
 
 function organizePNGs(steamData, folder) {
-  return findPNGs(folder).then(files => processFiles(folder, files, move));
+  return findPNGs(folder).then(files => processPNG(folder, files));
 }
 
 function organize(steamRoot, folder) {
