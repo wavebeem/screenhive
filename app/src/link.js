@@ -1,4 +1,5 @@
 const React = require("react");
+const C = require("classnames");
 
 const H = require("./helpers");
 
@@ -10,7 +11,11 @@ function Link(props) {
     event.preventDefault();
     H.openUrl(url);
   }
-  const className = "pointer link o-80 glow dark-blue b--black-30 b bb";
+  const className = C(
+    "pointer link b",
+    "blue hover-dark-blue",
+    "b--black-30 bb"
+  );
   return $("a", { className, onClick, href: url }, children);
 }
 

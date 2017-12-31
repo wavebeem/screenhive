@@ -15,8 +15,7 @@ const routeMap = {
 };
 
 function App(props) {
-  // const { route } = props.state;
-  const route = "working";
+  const { route } = props.state;
   if (routeMap.hasOwnProperty(route)) {
     return $(routeMap[route], props);
   }

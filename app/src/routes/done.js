@@ -16,7 +16,7 @@ function Done(props) {
 
   return $(
     "div",
-    {},
+    { className: "min-h-100 flex flex-column justify-center" },
     $(Button, { type: "primary", onClick: viewScreenshots }, "View screenshots")
   );
 }

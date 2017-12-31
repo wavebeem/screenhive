@@ -3,9 +3,8 @@ const { app, BrowserWindow } = require("electron");
 const Package = require("../package.json");
 
 let mainWindow = undefined;
-const DEBUG = false;
-const width = DEBUG ? 800 : 400;
-const height = DEBUG ? 600 : 550;
+const width = 400;
+const height = 550;
 
 const options = {
   width,
@@ -27,9 +26,6 @@ function createWindow() {
   mainWindow.on("closed", () => {
     mainWindow = undefined;
   });
-  if (DEBUG) {
-    mainWindow.webContents.openDevTools();
-  }
 }
 
 function maybeQuit() {
