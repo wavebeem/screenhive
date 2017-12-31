@@ -30,9 +30,8 @@ html {
 }
 
 .Spinner {
-  margin: 1em;
-  width: 3em;
-  height: 3em;
+  width: 5em;
+  height: 5em;
   border: 3px solid;
   border-right-color: transparent;
   border-bottom-color: transparent;
