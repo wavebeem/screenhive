@@ -1,43 +1,22 @@
-// -*- TODO -*-
-// Switch from "move" to "copy" since we're gonna use the Steam screenshot
-// directories inside Steam's internal stuff and we don't want to mess with it.
-// This means that app time will scale linearly with the number of screenshots
-// you take which is not cool, but that's life. Thanks Valve for your bad app.
-// Also we need to have smart detection logic for the actual Steam installation
-// location.
-//
-// Steam is generally installed to one of these locations:
-//
-//     ~/Library/Application Support/Steam
-//     C:\Program Files\Steam
-//     ?:\Steam
-//
-// Where "?:" represents any drive C through Z.
-//
-// From the Steam root, screenshots can be found here:
-//
-//     <SteamRoot>/userdata/<UserID>/760/remote/<AppID>/screenshots
-//
-// 760 is the AppID for "Steam Screenshots"
-
 const path = require("path");
 const fs = require("fs-extra");
 const sanitize = require("sanitize-filename");
 const glob = require("glob");
 
-// const { log } = require("./console");
-
 const STEAM_URL = "https://api.steampowered.com/ISteamApps/GetAppList/v0001/";
+const SCREENSHOT_REGEXP = /[0-9]+_.*[.]png/;
 
 const folderNames = {};
 
 function getSteamData() {
-  return fetch(STEAM_URL).then(resp => {
-    if (!resp.ok) {
-      throw new Error("failed to fetch Steam API data");
-    }
-    return resp.json();
-  });
+  return fetch(STEAM_URL)
+    .then(resp => {
+      if (!resp.ok) {
+        throw new Error("failed to fetch Steam API data");
+      }
+      return resp.json();
+    })
+    .then(data => data.applist.apps.app);
 }
 
 function getFolderName(id) {
@@ -48,8 +27,8 @@ function getID(filename) {
   return filename.split("_")[0];
 }
 
-function initializeNames(body) {
-  body.applist.apps.app.forEach(item => {
+function initializeNames(list) {
+  list.forEach(item => {
     folderNames[item.appid] = sanitize(item.name);
   });
 }
@@ -93,7 +72,7 @@ function looksSteamy(dir) {
   return dirs.map(d => path.resolve(dir, d)).every(d => fs.existsSync(d));
 }
 
-function findScreenshots(steamRoot) {
+function findJPEGs(steamRoot) {
   return new Promise(resolve => {
     // 760 is the ID of the app "Steam Screenshots"
     const pattern = "/userdata/*/760/remote/*/screenshots/*.jpg";
@@ -106,16 +85,58 @@ function findScreenshots(steamRoot) {
   });
 }
 
-function organize(steamRoot, folder) {
-  // TODO
-  folder;
-  findScreenshots(steamRoot).then(files => {
-    return files.reduce((p, file) => {
-      return p.then(() => {
-        console.log("COPY THE FILE OVER? " + file);
-      });
-    }, Promise.resolve(undefined));
+function looksLikeSteamScreenshot(name) {
+  return SCREENSHOT_REGEXP.test(name);
+}
+
+function organizeJPEGs(steamData, steamRoot, folder) {
+  return findJPEGs(steamRoot).then(files => {
+    return processFiles(folder, files, copy);
   });
+}
+
+function findPNGs(dir) {
+  return fs
+    .readdir(dir)
+    .then(files => files.filter(looksLikeSteamScreenshot))
+    .then(files => files.map(f => path.resolve(dir, f)));
+}
+
+function processFiles(folder, files, fn) {
+  const n = files.length;
+  const results = files.map(file => {
+    const base = path.basename(file);
+    const id = getID(base);
+    const name = getFolderName(id);
+    const dest = path.resolve(folder, name, base);
+    return fn(file, dest);
+  });
+  return Promise.all(results).then(() => n);
+}
+
+function move(src, dest) {
+  // return fs.move(src, dest, { overwrite: true });
+  console.log(`MOVE ${src} => ${dest}`);
+}
+
+function copy(src, dest) {
+  // return fs.copy(src, dest, { overwrite: false });
+  console.log(`COPY ${src} => ${dest}`);
+}
+
+function organizePNGs(steamData, folder) {
+  return findPNGs(folder).then(files => processFiles(folder, files, move));
+}
+
+function organize(steamRoot, folder) {
+  return getSteamData()
+    .then(initializeNames)
+    .then(steamData => {
+      return Promise.all([
+        organizePNGs(steamData, folder),
+        organizeJPEGs(steamData, steamRoot, folder)
+      ]);
+    });
 }
 
 exports.findRoot = findRoot;

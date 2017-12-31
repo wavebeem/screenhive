@@ -1,7 +1,6 @@
 const React = require("react");
 
 const Steam = require("../steam");
-const SteamPNG = require("../steam-png");
 const Button = require("../button");
 const H = require("../helpers");
 
@@ -29,8 +28,7 @@ function Start(props) {
 
   function start() {
     setRoute("working");
-    SteamPNG.organize(folder)
-      .then(() => Steam.organize(steamRoot, folder))
+    Steam.organize(steamRoot, folder)
       .then(() => setRoute("done"))
       .catch(fail);
   }
