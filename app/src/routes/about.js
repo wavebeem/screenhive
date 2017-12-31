@@ -22,17 +22,17 @@ function About(props) {
     $("div", {}, $(Button, { type: "subtle", onClick: goBack }, "Back")),
     $(
       "p",
-      { className: "mb0 f3 b" },
+      { className: "mb0 f3 b mt1 mb0" },
       `${Package.productName} ${Package.version}`
     ),
     $(
       "div",
-      { className: "flex-auto lh-copy" },
+      { className: "flex-auto lh-copy f6" },
       $(
         "p",
         {},
-        "PNG screenshots can also be organized if you follow the ",
-        $(Link, { url: homePage }, "Steam setup instructions"),
+        "Download the latest version or read documentation on the ",
+        $(Link, { url: homePage }, "Screenhive homepage"),
         "."
       ),
       $(
@@ -45,7 +45,7 @@ function About(props) {
     ),
     $(
       "p",
-      { className: "tc" },
+      { className: "tc mb1 f6 mid-gray" },
       "Copyright © 2018 ",
       $(Link, { url: myPage }, "Brian Mock")
     )
