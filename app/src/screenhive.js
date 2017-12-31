@@ -2,7 +2,7 @@ const React = require("react");
 
 const Conf = require("./conf");
 const App = require("./app");
-const Steam = require("./Steam");
+const Steam = require("./steam");
 
 const $ = React.createElement;
 

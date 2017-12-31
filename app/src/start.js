@@ -3,6 +3,7 @@ const { app, BrowserWindow } = require("electron");
 const Package = require("../package.json");
 
 let mainWindow = undefined;
+const DEBUG = false;
 const width = 420;
 const height = 420;
 
@@ -22,6 +23,9 @@ function createWindow() {
   mainWindow.setTitle(Package.productName);
   mainWindow.once("ready-to-show", () => {
     mainWindow.show();
+    if (DEBUG) {
+      mainWindow.webContents.openDevTools();
+    }
   });
   mainWindow.on("closed", () => {
     mainWindow = undefined;
