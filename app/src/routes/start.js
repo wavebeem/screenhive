@@ -103,7 +103,7 @@ function Start(props) {
     "div",
     { className: "min-h-100 flex flex-column justify-between" },
     aboutPageButton,
-    $("div", {}, folderPicker, steamRootPicker),
+    $("div", {}, steamRootPicker, folderPicker),
     mainButton
   );
 }

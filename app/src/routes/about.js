@@ -31,9 +31,9 @@ function About(props) {
       $(
         "p",
         {},
-        "Follow the ",
+        "PNG screenshots can also be organized if you follow the ",
         $(Link, { url: homePage }, "Steam setup instructions"),
-        " to create a screenshot folder before using this app."
+        "."
       ),
       $(
         "p",
