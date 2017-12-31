@@ -27,7 +27,7 @@ function About(props) {
     ),
     $(
       "div",
-      { className: "flex-auto" },
+      { className: "flex-auto lh-copy" },
       $(
         "p",
         {},
@@ -38,8 +38,9 @@ function About(props) {
       $(
         "p",
         {},
-        "GitHub: ",
-        $(Link, { url: githubPage }, "wavebeem/screenhive")
+        "The source code is available on GitHub at ",
+        $(Link, { url: githubPage }, "wavebeem/screenhive"),
+        "."
       )
     ),
     $(

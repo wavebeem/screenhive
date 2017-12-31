@@ -4,26 +4,20 @@ const C = require("classnames");
 const $ = React.createElement;
 
 const C_SHARED = C(
-  "pointer o-90",
+  "pointer bg-animate",
   "ttu b",
-  "bn",
+  "bn br1",
   "mv2 ph2 w-100",
   "chunky-focus"
 );
-const C_PRIMARY = C(
-  C_SHARED,
-  "text-shadow white bg-green pv3 f3 br1 button-shadow"
-);
-const C_SECONDARY = C(
-  C_SHARED,
-  "text-shadow white bg-blue pv2 br1 button-shadow"
-);
-const C_SUBTLE = C(C_SHARED, "bg-light-gray pv2 br1 black");
+const C_PRIMARY = C(C_SHARED, "white bg-green pv3 f3");
+const C_SECONDARY = C(C_SHARED, "white bg-blue pv2");
+const C_SUBTLE = C(C_SHARED, "bg-light-gray black pv2");
 const C_OUTLINE = C(
-  "bg-transparent dark-blue",
-  "br1 ba bw1 b--blue",
+  "bg-transparent bg-animate blue",
+  "br1 ba b--blue",
   "truncate",
-  "pointer o-90",
+  "pointer",
   "mv2 ph2 pv2 w-100",
   "chunky-focus"
 );
@@ -44,7 +38,14 @@ function Button(props) {
     onClick = noop,
     children
   } = props;
-  const className = C(classes[type], disabled ? "o-30" : "glow");
+  const disC = "o-30";
+  const regC = {
+    "hover-bg-dark-green": type === "primary",
+    "hover-bg-dark-blue": type === "secondary",
+    "hover-bg-washed-blue": type === "outline",
+    "hover-bg-moon-gray": type === "subtle"
+  };
+  const className = C(classes[type], disabled ? disC : regC);
   return $("button", { className, disabled, onClick }, children);
 }
 
