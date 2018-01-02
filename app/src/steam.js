@@ -50,6 +50,10 @@ function driveLetters() {
   );
 }
 
+function possibleSteamPaths() {
+  return ["Program Files (x86)", "Program Files", ""];
+}
+
 function possibleDirs() {
   if (process.platform === "darwin") {
     const home = process.env.HOME || "";
@@ -58,7 +62,7 @@ function possibleDirs() {
   } else if (process.platform === "win32") {
     const dirs = [];
     for (const drive of driveLetters()) {
-      for (const dir of ["Program Files", ""]) {
+      for (const dir of possibleSteamPaths()) {
         dirs.push(path.resolve(drive, dir, "Steam"));
       }
     }

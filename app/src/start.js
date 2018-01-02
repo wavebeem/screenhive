@@ -5,7 +5,7 @@ const Package = require("../package.json");
 let mainWindow = undefined;
 const DEBUG = false;
 const width = 420;
-const height = 420;
+const height = 480;
 
 const options = {
   width,

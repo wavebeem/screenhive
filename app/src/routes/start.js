@@ -76,7 +76,7 @@ function Start(props) {
     $(
       Button,
       { type: "secondary", onClick: pickDir },
-      "Choose screenshot folder"
+      "Choose screenshot destination"
     ),
     $(
       Button,
@@ -103,7 +103,7 @@ function Start(props) {
     "div",
     { className: "min-h-100 flex flex-column justify-between" },
     aboutPageButton,
-    $("div", {}, steamRootPicker, folderPicker),
+    $("div", {}, steamRootPicker, $("div", { className: "pb3" }), folderPicker),
     mainButton
   );
 }

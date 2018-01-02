@@ -4,7 +4,7 @@ const C = require("classnames");
 const $ = React.createElement;
 
 const C_SHARED = C(
-  "pointer bg-animate",
+  "bg-animate",
   "ttu b",
   "bn br1",
   "mv1 ph2 w-100",
@@ -17,7 +17,6 @@ const C_OUTLINE = C(
   "bg-transparent bg-animate blue",
   "br1 ba b--blue",
   "truncate",
-  "pointer",
   "mv1 ph2 pv2 w-100",
   "chunky-focus"
 );
@@ -40,10 +39,10 @@ function Button(props) {
   } = props;
   const disC = "o-30";
   const regC = {
-    "hover-bg-dark-green": type === "primary",
-    "hover-bg-dark-blue": type === "secondary",
-    "hover-bg-washed-blue": type === "outline",
-    "hover-bg-moon-gray": type === "subtle"
+    "pointer hover-bg-dark-green": type === "primary",
+    "pointer hover-bg-dark-blue": type === "secondary",
+    "pointer hover-bg-washed-blue": type === "outline",
+    "pointer hover-bg-moon-gray": type === "subtle"
   };
   const className = C(classes[type], disabled ? disC : regC);
   return $("button", { className, disabled, onClick }, children);
