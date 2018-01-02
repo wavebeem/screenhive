@@ -22,7 +22,7 @@ function About(props) {
     $("div", {}, $(Button, { type: "subtle", onClick: goBack }, "Back")),
     $(
       "p",
-      { className: "mb0 f3 b mt1 mb0" },
+      { className: "mb0 f3 b lh-title mt2 mb0" },
       `${Package.productName} ${Package.version}`
     ),
     $(

@@ -10,7 +10,7 @@ const C_SHARED = C(
   "mv1 ph2 w-100",
   "chunky-focus"
 );
-const C_PRIMARY = C(C_SHARED, "white bg-green pv3 f3");
+const C_PRIMARY = C(C_SHARED, "white bg-green pv3 f4");
 const C_SECONDARY = C(C_SHARED, "white bg-blue pv2");
 const C_SUBTLE = C(C_SHARED, "bg-light-gray black pv2");
 const C_OUTLINE = C(

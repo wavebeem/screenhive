@@ -96,7 +96,7 @@ function Start(props) {
       disabled: !folder,
       onClick: start
     },
-    "Organize"
+    "Organize screenshots"
   );
 
   return $(
