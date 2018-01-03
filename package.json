@@ -7,8 +7,11 @@
     "prestart": "npm run -s prettify && npm run -s make:js",
     "start": "electron app",
     "pack": "build --dir",
+    "preico": "npm run -s scale-icons",
+    "preicns": "npm run -s scale-icons",
+    "scale-icons": "node ./_scripts/scale-icons.js",
     "ico": "convert img/Screenhive-*px.png build/icon.ico",
-    "icns": "./scripts/make-iconset",
+    "icns": "./_scripts/make-iconset.rb",
     "dist:mac": "build --mac",
     "dist:win": "build --win"
   },
