@@ -70,6 +70,13 @@ function Start(props) {
     )
   );
 
+  const explainPara = $(
+    "p",
+    { className: "bt pt2 b--black-10 mb1 lh-copy near-black f6" },
+    "Your screenshots will be organized in folders by game title, ",
+    "so you can find them easily later."
+  );
+
   const folderPicker = $(
     "div",
     {},
@@ -103,7 +110,7 @@ function Start(props) {
     "div",
     { className: "min-h-100 flex flex-column justify-between" },
     aboutPageButton,
-    $("div", {}, steamRootPicker, $("div", { className: "pb3" }), folderPicker),
+    $("div", {}, steamRootPicker, explainPara, folderPicker),
     mainButton
   );
 }

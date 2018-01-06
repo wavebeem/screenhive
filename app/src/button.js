@@ -5,7 +5,7 @@ const $ = React.createElement;
 
 const C_SHARED = C(
   "bg-animate",
-  "ttu b",
+  "b",
   "bn br1",
   "mv1 ph2 w-100",
   "chunky-focus"
