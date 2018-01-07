@@ -10,7 +10,7 @@
     "preico": "npm run -s scale-icons",
     "preicns": "npm run -s scale-icons",
     "scale-icons": "node ./_scripts/scale-icons.js",
-    "ico": "convert img/Screenhive-*px.png build/icon.ico",
+    "ico": "convert img/win-*px.png build/icon.ico",
     "icns": "./_scripts/make-iconset.rb",
     "dist:mac": "build --mac",
     "dist:win": "build --win"
