@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "postinstall": "install-app-deps",
-    "make:js": "echo TODO",
-    "prettify": "prettier --write 'app/src/**/*.js' app/style.css",
+    "make:js": "tsc -p app",
+    "prettify": "prettier --write 'app/src/**/*.{ts,tsx,js}' app/style.css",
     "prestart": "npm run -s prettify && npm run -s make:js",
     "start": "electron app",
     "pack": "build --dir",
@@ -29,9 +29,18 @@
     }
   },
   "devDependencies": {
-    "electron": "1.8.1",
+    "@types/classnames": "^2.2.3",
+    "@types/electron": "^1.6.10",
+    "@types/fs-extra": "^5.0.0",
+    "@types/glob": "^5.0.34",
+    "@types/node": "^8.5.7",
+    "@types/react": "^16.0.34",
+    "@types/react-dom": "^16.0.3",
+    "@types/sanitize-filename": "^1.1.28",
+    "electron": "1.8.2-beta.3",
     "electron-builder": "^6.7.3",
     "eslint": "^3.19.0",
-    "prettier": "1.9.2"
+    "prettier": "1.9.2",
+    "typescript": "^2.6.2"
   }
 }

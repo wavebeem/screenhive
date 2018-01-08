@@ -1,7 +1,7 @@
 const React = require("react");
 
 const Steam = require("../steam");
-const Button = require("../button");
+const Button = require("../button").default;
 const H = require("../helpers");
 
 const $ = React.createElement;
@@ -36,13 +36,15 @@ function Start(props) {
   function fail(err) {
     setRoute("start");
     process.stdout.write(err.stack + "\n");
-    const options = {
-      type: "error",
-      title: "Screenhive: Error",
-      message: err.stack,
-      buttons: ["OK"]
-    };
-    H.showMessageBox(options, () => {});
+    H.showMessageBox(
+      {
+        type: "error",
+        title: "Screenhive: Error",
+        message: err.stack,
+        buttons: ["OK"]
+      },
+      () => {}
+    );
   }
 
   const aboutPageButton = $(
