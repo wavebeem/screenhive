@@ -30,20 +30,13 @@ html {
 }
 
 .Spinner {
-  width: 5em;
-  height: 5em;
-  border: 3px solid;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  animation: SpinSpinSpin 1s infinite cubic-bezier(0.72, 0.3, 0.82, 0.54);
+  border-color: rgba(0, 0, 0, 0.05);
+  border-top-color: currentColor;
+  animation: SpinSpinSpin 1s infinite linear;
 }
 
 @keyframes SpinSpinSpin {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
