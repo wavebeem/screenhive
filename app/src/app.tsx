@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as Start from "./routes/start";
+import Start from "./routes/start";
 import Working from "./routes/working";
 import Done from "./routes/done";
 import About from "./routes/about";
