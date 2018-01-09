@@ -6,7 +6,7 @@
   "copyright": "Copyright © 2018 Brian Mock",
   "homepage": "https://screenhive.net",
   "version": "2.0.0-beta.17",
-  "main": "src/start.js",
+  "main": "build/start.js",
   "private": true,
   "license": "MIT",
   "dependencies": {

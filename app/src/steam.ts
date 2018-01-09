@@ -1,14 +1,19 @@
-const path = require("path");
-const fs = require("fs-extra");
-const sanitize = require("sanitize-filename");
-const glob = require("glob");
+import * as path from "path";
+import * as fs from "fs-extra";
+import * as sanitize from "sanitize-filename";
+import * as glob from "glob";
 
 const STEAM_URL = "https://api.steampowered.com/ISteamApps/GetAppList/v0001/";
 const SCREENSHOT_REGEXP = /[0-9]+_.*[.]png/;
 
-const folderNames = {};
+const folderNames: Record<string, string> = {};
 
-function getSteamData() {
+interface SteamAppEntry {
+  appid: string;
+  name: string;
+}
+
+function getSteamData(): Promise<SteamAppEntry[]> {
   return fetch(STEAM_URL)
     .then(resp => {
       if (!resp.ok) {
@@ -19,21 +24,21 @@ function getSteamData() {
     .then(data => data.applist.apps.app);
 }
 
-function getFolderName(id) {
+function getFolderName(id: keyof typeof folderNames) {
   return folderNames[id] || "_game-" + id;
 }
 
-function getID(filename) {
+function getID(filename: string) {
   return filename.split("_")[0];
 }
 
-function initializeNames(list) {
+function initializeNames(list: SteamAppEntry[]) {
   list.forEach(item => {
     folderNames[item.appid] = sanitize(item.name);
   });
 }
 
-function findRoot() {
+export function findRoot() {
   for (const dir of possibleDirs()) {
     if (looksSteamy(dir)) {
       return dir;
@@ -46,7 +51,7 @@ function driveLetters() {
   const start = "C".charCodeAt(0);
   return Array.from(
     { length: 24 },
-    (x, i) => String.fromCharCode(start + i) + ":/"
+    (_x, i) => String.fromCharCode(start + i) + ":/"
   );
 }
 
@@ -71,13 +76,13 @@ function possibleDirs() {
   return [];
 }
 
-function looksSteamy(dir) {
+function looksSteamy(dir: string) {
   const dirs = ["steamapps", "userdata"];
   return dirs.map(d => path.resolve(dir, d)).every(d => fs.existsSync(d));
 }
 
-function findJPEGs(steamRoot) {
-  return new Promise(resolve => {
+function findJPEGs(steamRoot: string) {
+  return new Promise<string[]>(resolve => {
     // 760 is the ID of the app "Steam Screenshots"
     const pattern = "/userdata/*/760/remote/*/screenshots/*.jpg";
     glob(pattern, { root: steamRoot }, (err, files) => {
@@ -89,24 +94,24 @@ function findJPEGs(steamRoot) {
   });
 }
 
-function looksLikeSteamScreenshot(name) {
+function looksLikeSteamScreenshot(name: string) {
   return SCREENSHOT_REGEXP.test(name);
 }
 
-function organizeJPEGs(steamData, steamRoot, folder) {
+function organizeJPEGs(steamRoot: string, folder: string) {
   return findJPEGs(steamRoot).then(files => {
     return processJPEG(folder, files);
   });
 }
 
-function findPNGs(dir) {
+function findPNGs(dir: string) {
   return fs
     .readdir(dir)
     .then(files => files.filter(looksLikeSteamScreenshot))
     .then(files => files.map(f => path.resolve(dir, f)));
 }
 
-function processPNG(folder, files) {
+function processPNG(folder: string, files: string[]) {
   const n = files.length;
   const results = files.map(file => {
     const base = path.basename(file);
@@ -118,7 +123,7 @@ function processPNG(folder, files) {
   return Promise.all(results).then(() => n);
 }
 
-function processJPEG(folder, files) {
+function processJPEG(folder: string, files: string[]) {
   const n = files.length;
   const results = files.map(file => {
     const chunks = path.resolve(file, "../..").split(path.sep);
@@ -131,30 +136,27 @@ function processJPEG(folder, files) {
   return Promise.all(results).then(() => n);
 }
 
-function move(src, dest) {
+function move(src: string, dest: string) {
   return fs.move(src, dest, { overwrite: true });
   // console.log(`MOVE ${src} => ${dest}`);
 }
 
-function copy(src, dest) {
+function copy(src: string, dest: string) {
   return fs.copy(src, dest, { overwrite: false });
   // console.log(`COPY ${src} => ${dest}`);
 }
 
-function organizePNGs(steamData, folder) {
+function organizePNGs(folder: string) {
   return findPNGs(folder).then(files => processPNG(folder, files));
 }
 
-function organize(steamRoot, folder) {
+export function organize(steamRoot: string, folder: string) {
   return getSteamData()
     .then(initializeNames)
-    .then(steamData => {
+    .then(() => {
       return Promise.all([
-        organizePNGs(steamData, folder),
-        organizeJPEGs(steamData, steamRoot, folder)
+        organizePNGs(folder),
+        organizeJPEGs(steamRoot, folder)
       ]);
     });
 }
-
-exports.findRoot = findRoot;
-exports.organize = organize;

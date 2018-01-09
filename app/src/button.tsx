@@ -1,7 +1,5 @@
-const React = require("react");
-const C = require("classnames");
-
-const $ = React.createElement;
+import * as React from "react";
+import * as C from "classnames";
 
 const C_SHARED = C(
   "bg-animate",
@@ -30,7 +28,14 @@ const classes = {
 
 const noop = () => {};
 
-function Button(props) {
+export interface IButtonProps {
+  type?: keyof typeof classes;
+  disabled?: boolean;
+  onClick?: () => void;
+  children?: any;
+}
+
+export default function Button(props: IButtonProps) {
   const {
     type = "secondary",
     disabled = false,
@@ -45,7 +50,9 @@ function Button(props) {
     "pointer hover-bg-moon-gray": type === "subtle"
   };
   const className = C(classes[type], disabled ? disC : regC);
-  return $("button", { className, disabled, onClick }, children);
+  return (
+    <button className={className} disabled={disabled} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
-
-module.exports = Button;

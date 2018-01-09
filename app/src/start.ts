@@ -1,27 +1,28 @@
-const { app, BrowserWindow } = require("electron");
+import { app, BrowserWindow } from "electron";
 
-const Package = require("../package.json");
+import * as Package from "../package.json";
 
-let mainWindow = undefined;
+let mainWindow: BrowserWindow | undefined = undefined;
 const DEBUG = false;
 const width = 420;
 const height = 480;
 
-const options = {
-  width,
-  height,
-  minWidth: width,
-  minHeight: height,
-  show: false,
-  useContentSize: true
-};
-
 function createWindow() {
-  mainWindow = new BrowserWindow(options);
+  mainWindow = new BrowserWindow({
+    width,
+    height,
+    minWidth: width,
+    minHeight: height,
+    show: false,
+    useContentSize: true
+  });
   mainWindow.setMenu(null);
   mainWindow.loadURL(`file://${__dirname}/../index.html`);
   mainWindow.setTitle(Package.productName);
   mainWindow.once("ready-to-show", () => {
+    if (!mainWindow) {
+      return;
+    }
     mainWindow.show();
     if (DEBUG) {
       mainWindow.webContents.openDevTools();

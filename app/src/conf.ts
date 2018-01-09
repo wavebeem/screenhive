@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 
 const env = process.env;
 const dir =
@@ -7,7 +7,7 @@ const dir =
 const name = path.resolve(dir, ".screenhive.json");
 const UTF8 = "utf-8";
 
-function read() {
+export function read() {
   try {
     return JSON.parse(fs.readFileSync(name, UTF8));
   } catch (err) {
@@ -15,13 +15,10 @@ function read() {
   }
 }
 
-function write(data) {
+export function write(data: any) {
   try {
     fs.writeFileSync(name, JSON.stringify(data, null, 2), UTF8);
   } catch (err) {
     console.error("Failed to write config file!");
   }
 }
-
-exports.read = read;
-exports.write = write;
