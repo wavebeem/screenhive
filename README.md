@@ -1,3 +1,3 @@
-# <img align="left" src="img/Screenhive-48px.png"> Screenhive
+# <img align="left" src="img/mac-48px.png"> Screenhive
 
-[screenhive.net](https://screenhive.net)
+Please check out [screenhive.net](https://screenhive.net) for more information.
