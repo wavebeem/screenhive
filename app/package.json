@@ -5,7 +5,7 @@
   "author": "Brian Mock <brian@mockbrian.com>",
   "copyright": "Copyright © 2018 Brian Mock",
   "homepage": "https://screenhive.net",
-  "version": "2.0.0-beta.17",
+  "version": "2.0.0",
   "main": "build/start.js",
   "private": true,
   "license": "MIT",
