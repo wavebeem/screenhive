@@ -1,19 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "postinstall": "install-app-deps",
+    "postinstall": "electron-builder install-app-deps",
     "make:js": "tsc -p app",
     "prettify": "prettier --write 'app/src/**/*.{ts,tsx,js}' app/style.css",
     "prestart": "npm run -s prettify && npm run -s make:js",
     "start": "electron app",
-    "pack": "build --dir",
-    "preico": "npm run -s scale-icons",
-    "preicns": "npm run -s scale-icons",
-    "scale-icons": "node ./_scripts/scale-icons.js",
-    "ico": "convert img/*px.png build/icon.ico",
-    "icns": "./_scripts/make-iconset.rb",
-    "dist:mac": "build --mac",
-    "dist:win": "build --win"
+    "pack": "electron-builder --dir",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win"
   },
   "build": {
     "appId": "com.mockbrian.Screenhive",
@@ -37,10 +32,10 @@
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "@types/sanitize-filename": "^1.1.28",
-    "electron": "1.8.2-beta.3",
-    "electron-builder": "^6.7.3",
+    "electron": "^2.0.2",
+    "electron-builder": "^20.15.1",
     "eslint": "^3.19.0",
-    "prettier": "1.9.2",
+    "prettier": "1.13.5",
     "typescript": "^2.6.2"
   }
 }
