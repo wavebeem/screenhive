@@ -1,15 +1,16 @@
 const { spawnSync } = require("child_process");
 
 process.chdir(__dirname);
-process.chdir("../img");
+process.chdir("../build");
 
-for (const size of [16, 32, 40, 48, 256]) {
-  for (const os of ["mac", "win"]) {
-    spawnSync("convert", [
-      `${os}-orig.png`,
-      "-scale",
-      size + "",
-      `${os}-${size}px.png`
-    ]);
-  }
+const sizes = [16, 32, 40, 48, 256];
+
+const getFilename = size => `scaled-${size}px.png`;
+
+const filenames = sizes.map(getFilename);
+
+for (const size of sizes) {
+  spawnSync("convert", ["icon.png", "-scale", size + "", getFilename(size)]);
 }
+
+spawnSync("convert", [...filenames, "icon.ico"]);

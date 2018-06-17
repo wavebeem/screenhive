@@ -5,6 +5,7 @@
     "make:js": "tsc -p app",
     "prettify": "prettier --write 'app/src/**/*.{ts,tsx,js}' app/style.css",
     "prestart": "npm run -s prettify && npm run -s make:js",
+    "ico": "node _scripts/scale-icons.js",
     "start": "electron app",
     "pack": "electron-builder --dir",
     "dist:mac": "electron-builder --mac",
