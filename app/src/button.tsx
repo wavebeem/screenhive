@@ -44,10 +44,10 @@ export default function Button(props: IButtonProps) {
   } = props;
   const disC = "o-30";
   const regC = {
-    "pointer hover-bg-dark-green": type === "primary",
-    "pointer hover-bg-dark-blue": type === "secondary",
-    "pointer hover-bg-washed-blue": type === "outline",
-    "pointer hover-bg-moon-gray": type === "subtle"
+    "hover-bg-dark-green": type === "primary",
+    "hover-bg-dark-blue": type === "secondary",
+    "hover-bg-near-white": type === "outline",
+    "hover-bg-moon-gray": type === "subtle"
   };
   const className = C(classes[type], disabled ? disC : regC);
   return (

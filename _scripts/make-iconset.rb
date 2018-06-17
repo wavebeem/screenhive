@@ -6,7 +6,7 @@ cd File.dirname($0)
 cd "../build" do
   mkdir_p "icon.iconset"
   Dir["../img/*.png"].each do |file|
-    m = file.match(%r{mac-(\d+)px[.]png})
+    m = file.match(%r{(\d+)px[.]png})
     if m
       size = m[1].to_i
       cp file, "icon.iconset/icon_#{size}x#{size}.png"
